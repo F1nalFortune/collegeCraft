@@ -1,7 +1,7 @@
 <?php
  $servername = "localhost";
- $username = "username";
- $password = "password";
+ $username = "root";
+ $password = "";
  $db = "collegeCraft";
  // Create connection
  $conn = new mysqli($servername, $username, $password, $db);
@@ -12,7 +12,7 @@
  }
  echo "Connected successfully";
 
-  $sql = "CREATE DATABASE collegeCraft";
+  $sql = "CREATE DATABASE IF NOT EXISTS collegeCraft";
     if ($conn->query($sql) === TRUE) {
         echo "Database created successfully";
     } else {
