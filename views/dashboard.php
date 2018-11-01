@@ -1,5 +1,20 @@
 <!DOCTYPE html>
 <html>
+<?php
+	if(isset($SESSION['loggedin'])){
+		if($SESSION['loggedin']===1){
+			
+		}
+		else{
+			header("Location: index.php");
+		}
+	}else{
+		echo "not logged in";
+		header("Location: index.php?notlogged='1'");
+	}
+?>
+
+
 <head>
   <?php include './partials/head.html' ?>
 </head>

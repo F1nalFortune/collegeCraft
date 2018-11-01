@@ -63,7 +63,12 @@ session_destroy();
     <form action="index.php" method="POST" style="position:relative;left:20px;">
 <?php
   if($_GET){
-    echo "<h6 color:red> BAD USER/PASS </h6>";
+    if(isset($_GET['badpwd'])){
+      echo "<h6 color:red> BAD USER/PASS </h6>";
+    }
+    if(isset($_GET['notlogged'])){
+      echo "Must be logged in to use dashboard";
+    }
   }
 ?>
     <p>Log in here:
