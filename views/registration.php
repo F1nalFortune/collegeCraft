@@ -7,7 +7,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	$servername = "localhost";
 	$username = "root";
 	$password = "";
-	$conn = @new mysqli($servername, $username, $password,'university');
+	$conn = @new mysqli($servername, $username, $password);
+	$conn->query("create database if not exists collegeCraft");
+	$conn->query("use collegeCraft");
+	$conn->query("create table if not exists users (username varchar(32), hashed_password varchar(255),  primary key(username) )");
 	$userToAdd = $_POST['usr'];
 	$pwdToAdd = $_POST['pwd'];
 	$hashedPass = crypt($pwdToAdd,'$1$salt012345');

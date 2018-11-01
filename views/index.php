@@ -16,7 +16,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $_SESSION["pwd"] = $_POST['password'];
         $pass = crypt($_SESSION["pwd"],'$1$salt012345'); #cmp with stored
         $user = $_SESSION["usr"];
-        $conn = @new mysqli('127.0.0.1', 'root', '','university');
+        $conn = @new mysqli('127.0.0.1', 'root', '');
+	$conn->query("create database if not exists collegeCraft");
+	$conn->query("use collegeCraft");
+	$conn->query("create table if not exists users (username varchar(32), hashed_password varchar(255),  primary key(username) )");
         $sql = "select hashed_password from users where username='" . $user . "';";
         $result = $conn->query($sql);
         if ( $result->num_rows === 0 ){
