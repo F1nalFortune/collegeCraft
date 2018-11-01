@@ -36,7 +36,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 header("Location: dashboard.php");
         }else{
                 echo "bad password";
-                header("Location: index.php");
+		$_SESSION["badFlag"]=1;
+                header("Location: index.php?badpwd='1'");
                 echo "bad password";
         }
 
@@ -60,6 +61,11 @@ session_destroy();
   <body>
     <div style="">
     <form action="index.php" method="POST" style="position:relative;left:20px;">
+<?php
+  if($_GET){
+    echo "<h6 color:red> BAD USER/PASS </h6>";
+  }
+?>
     <p>Log in here:
     <br>
     <span>Username: <input type="Text" name="username"/> </span>
