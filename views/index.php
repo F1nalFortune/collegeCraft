@@ -1,10 +1,6 @@
 <?php
   include './partials/header.html';
- ?>
-
-<?php 
-
-session_start();
+  session_start();
 
 ?>
 
@@ -12,10 +8,10 @@ session_start();
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-        $_SESSION["usr"] = $_POST['username'];
-        $_SESSION["pwd"] = $_POST['password'];
-        $pass = crypt($_SESSION["pwd"],'$1$salt012345'); #cmp with stored
-        $user = $_SESSION["usr"];
+        $_SESSION["username"] = $_POST['username'];
+        $_SESSION["password"] = $_POST['password'];
+        $pass = crypt($_SESSION["password"],'$1$salt012345'); #cmp with stored
+        $user = $_SESSION["username"];
         $conn = @new mysqli('127.0.0.1', 'root', '');
 	$conn->query("create database if not exists collegeCraft");
 	$conn->query("use collegeCraft");
@@ -32,12 +28,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         echo "1000000";
 	if($row[0] === $pass){
                 echo "success";
-                $_SESSION["loggedin"] = "1";
+                    $_SESSION["loggedin"] = "1";
                 header("Location: dashboard.php");
         }else{
                 echo "bad password";
 		$_SESSION["badFlag"]=1;
-                header("Location: index.php?badpwd='1'");
+                header("Location: index.php?badpassword='1'");
                 echo "bad password";
         }
 
@@ -59,29 +55,49 @@ session_destroy();
     <?php include './partials/head.html' ?>
   </head>
   <body>
-    <div style="">
-    <form action="index.php" method="POST" style="position:relative;left:20px;">
-<?php
-  if($_GET){
-    if(isset($_GET['badpwd'])){
-      echo "<h6 color:red> BAD USER/PASS </h6>";
-    }
-  }
-?>
-    <p>Log in here:
-    <br>
-    <span>Username: <input type="Text" name="username"/> </span>
-    <br>
-    <span>Password: <input type="password" name="password"/> </span>
-    </p>
-    <input type="Submit" value = "Submit"/>
-    <br>
-    <p>Not registered? Register <a href="registration.php"> here </a> </p>
 
-    </form>
-    </div>
+      <div class='auth_form'>
+        <div class='row' style='text-align: center; background: white;'>
+          <p id='login' class='col-sm-3 offset-sm-3'>Log in</p>
+          <p id='register' class='col-sm-3'>Sign Up</p>
+        </div>
+        <form id='auth_form' action="index.php" method="POST" style='text-align: center;'>
+          <?php
+            if($_GET){
+              if(isset($_GET['badpassword'])){
+                echo "<h6 color:red> BAD USER/PASS </h6>";
+              }
+            }
+          ?>
+        <br>
+        <div class='row'>
+          <span class='col-sm-12'>Username: <br/><input type="Text" name="username"/> </span>
+        </div>
+        <div class='row'>
+          <span class='col-sm-12'>Password: <br/><input type="password" name="password"/> </span>
+        </div>
+        <input type="Submit" value = "Submit"/>
+        <br>
+        <p>Not registered? Register <a href="registration.php"> here </a> </p>
+
+        </form>
+      </div>
 
 
 
   </body>
+  <script>
+      //Switch login / registration form
+    $("#login").click(function() {
+      $("#auth_form").attr("action", "index.php");
+      document.getElementById('login').style.background=' #80808024';
+      document.getElementById('register').style.background='white';
+    });
+
+    $("#register").click(function() {
+      $("#auth_form").attr("action", "registration.php");
+      document.getElementById('login').style.background='white';
+      document.getElementById('register').style.background=' #80808024';
+    });
+  </script>
 </html>

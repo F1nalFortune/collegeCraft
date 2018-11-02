@@ -11,9 +11,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	$conn->query("create database if not exists collegeCraft");
 	$conn->query("use collegeCraft");
 	$conn->query("create table if not exists users (username varchar(32), hashed_password varchar(255),  primary key(username) )");
-	$userToAdd = $_POST['usr'];
-	$pwdToAdd = $_POST['pwd'];
-	$hashedPass = crypt($pwdToAdd,'$1$salt012345');
+	$userToAdd = $_POST['username'];
+	$passwordToAdd = $_POST['password'];
+	$hashedPass = crypt($passwordToAdd,'$1$salt012345');
 	$sql = "INSERT INTO users (username, hashed_password) VALUES ('$userToAdd', '$hashedPass' );";
 	if($conn->query($sql) === TRUE){
 		echo "successfully added";
@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	}else{
 		echo "error $conn->error()";
 	}
-	#$sql = "INSERT INTO users(username, password) VALUES ($_POST["usr"], crypt($_SESSION["pwd"],"$1$salt012345") );";	
+	#$sql = "INSERT INTO users(username, password) VALUES ($_POST["username"], crypt($_SESSION["password"],"$1$salt012345") );";	
 	}
 
 ?>
@@ -40,10 +40,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	<p>Register Here:
 	<br>
 	<br />
-	<span>Username <input type="Text" name="usr"/> </span> 
+	<span>Username <input type="Text" name="username"/> </span> 
 	<br>
 	<br />
-	<span>Password <input type="password" name="pwd"/> </span>
+	<span>Password <input type="password" name="password"/> </span>
 	</p>
 	<input type="Submit" value = "Register"/>
 	<br />

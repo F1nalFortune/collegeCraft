@@ -1,0 +1,15 @@
+.auth_form{
+  margin-left: 35%;
+    margin-right: 35%;
+    background: #80808024;
+
+}
+
+#login{
+  margin-bottom: 0;
+  background: #80808024;
+}
+
+#register{
+  margin-bottom: 0;
+}

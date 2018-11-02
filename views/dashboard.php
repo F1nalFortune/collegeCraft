@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
 <?php
-	if(isset($_SESSION['loggedin'])){
-		echo "not logged in";
+	session_start();
+	// if(isset($_SESSION['loggedin'])){
+	// 	echo "not logged in";
+	// 	header("Location: index.php?notlogged='1'");
+	// }
+	if($_SESSION["loggedin"] != "1"){
 		header("Location: index.php?notlogged='1'");
 	}
 ?>
@@ -14,6 +18,7 @@
 <body>
   <?php include './partials/header.html' ?>
   <h1>Dashboard</h1>
+	<h4><?php echo "Welcome ". $_SESSION["username"]. "!";?></h4>
   <p>
     Lorem Khaled Ipsum is a major key to success. Celebrate success right, the only way, apple. I’m up to something. The key to more success is to get a massage once a week, very important, major key, cloth talk. Lion! Learning is cool, but knowing is better, and I know the key to success. It’s on you how you want to live your life. Everyone has a choice. I pick my choice, squeaky clean. A major key, never panic. Don’t panic, when it gets crazy and rough, don’t panic, stay calm. Let me be clear, you have to make it through the jungle to make it to paradise, that’s the key, Lion!
 
