@@ -77,8 +77,6 @@ session_destroy();
           <span class='col-sm-12'>Password: <br/><input type="password" name="password"/> </span>
         </div>
         <input type="Submit" value = "Submit"/>
-        <br>
-        <p>Not registered? Register <a href="registration.php"> here </a> </p>
 
         </form>
       </div>

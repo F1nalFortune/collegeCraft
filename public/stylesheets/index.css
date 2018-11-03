@@ -13,3 +13,7 @@
 #register{
   margin-bottom: 0;
 }
+
+.list-group-item:hover{
+  cursor: pointer;
+}
