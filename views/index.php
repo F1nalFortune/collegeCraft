@@ -2,20 +2,16 @@
 	if(session_status() !== PHP_SESSION_ACTIVE){
 		session_start();
 	} #works
+	if(isset($_GET['logUserOut'])){
+		session_unset();
+		session_destroy();
+	}
         if(isset($_SESSION['loggedin'])){	
 		header("Location: dashboard.php");
 		exit();
 	}
 	include './partials/header.html';
 
-	if(!isset($_GET['logUserOut'])){
-		if(session_status() !== PHP_SESSION_ACTIVE){
-			session_start();
-		}
-	}else{
-		session_unset();
-		session_destroy();
-	}
 
 	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
