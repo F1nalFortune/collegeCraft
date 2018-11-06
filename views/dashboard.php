@@ -1,8 +1,9 @@
-<!DOCTYPE html>
 <html>
 <?php
-	if(isset($_SESSION['loggedin'])){
-		echo "not logged in";
+        if(session_status() !== PHP_SESSION_ACTIVE){
+		session_start(); 
+	} 
+	if(!isset($_SESSION['loggedin'])){
 		header("Location: index.php?notlogged='1'");
 	}
 ?>

@@ -10,6 +10,15 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/collegeCraft/views/about.php">About</a>
+      <li class="nav-item" style="text-align:right;line-height:2.5;">
+<?php
+        if(session_status() !== PHP_SESSION_ACTIVE){
+                session_start();
+        }
+	if(isset($_SESSION['loggedin'] )){
+		echo "Hello, you are logged in as " . $_SESSION['usr'] . "!  Click here to <a href = /collegeCraft/views/index.php?logUserOut=1> log out. </a> " ;
+	}
+?>
       </li>
     </ul>
   </div>
