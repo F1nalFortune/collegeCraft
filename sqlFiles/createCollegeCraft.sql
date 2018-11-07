@@ -10,3 +10,4 @@ CREATE TABLE product (product_id INT, description varchar(256), price INT, categ
 CREATE TABLE comments (comment_id INT, product_id INT, user_id INT, review varchar(256), rating INT, PRIMARY KEY (comment_id));
 INSERT INTO users (username, hashed_password) VALUES ('aaaa','$1$salt0123$DDmlS/eUhEk23hF59K/Yv/');
 INSERT INTO users (username, hashed_password) VALUES ('aaaaaa','$1$salt0123$01QCUmrv4.Ao3hQdGHB6c1');
+INSERT INTO users (username, hashed_password) VALUES ('hello','$1$salt0123$3vhIeCFYVtADi.UiQs3Ae/');

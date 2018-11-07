@@ -11,7 +11,7 @@
 		session_unset();
 		session_destroy();
 	}
-        if(isset($_SESSION['loggedin']
+        if(isset($_SESSION['loggedin'])){
 		header("Location: dashboard.php");
 		exit();
 	}
