@@ -15,6 +15,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	$pwdToAdd = $_POST['pwd'];
 	$hashedPass = crypt($pwdToAdd,'$1$salt012345');
 	$sql = "INSERT INTO users (username, hashed_password) VALUES ('$userToAdd', '$hashedPass' );";
+	#insert into permanant database
 	if($conn->query($sql) === TRUE){
 		echo "successfully added";
 		header("Location: index.php");
