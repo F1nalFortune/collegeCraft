@@ -8,4 +8,5 @@ CREATE TABLE reputation (reputation_id INT, trust_level INT, statistics varchar(
 CREATE TABLE sells (user_id INT, product_id INT);
 CREATE TABLE product (product_id INT, description varchar(256), price INT, category varchar(256), PRIMARY KEY (product_id));
 CREATE TABLE comments (comment_id INT, product_id INT, user_id INT, review varchar(256), rating INT, PRIMARY KEY (comment_id));
-INSERT INTO users (username, hashed_password) VALUES ("guest","$1$salt0123$ymx.OhIVFoAHRq3f5kXpu.");
+INSERT INTO users (username, hashed_password) VALUES ('aaaa','$1$salt0123$DDmlS/eUhEk23hF59K/Yv/');
+INSERT INTO users (username, hashed_password) VALUES ('aaaaaa','$1$salt0123$01QCUmrv4.Ao3hQdGHB6c1');

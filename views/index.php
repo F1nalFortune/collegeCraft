@@ -1,6 +1,8 @@
 <?php
 	require 'helpers.php';
-	prepareDB();
+	if(!isset($_GET['dontreload'])){
+		prepareDB();
+	}
 	#load up the database
 	if(session_status() !== PHP_SESSION_ACTIVE){
 		session_start();
@@ -9,7 +11,7 @@
 		session_unset();
 		session_destroy();
 	}
-        if(isset($_SESSION['loggedin'])){	
+        if(isset($_SESSION['loggedin']
 		header("Location: dashboard.php");
 		exit();
 	}
@@ -68,7 +70,7 @@
   </head>
   <body>
     <div style="">
-    <form action="index.php" method="POST" style="position:relative;left:20px;">
+    <form action="index.php?dontreload=1" method="POST" style="position:relative;left:20px;">
 <?php
   if($_GET){
     if(isset($_GET['badpwd'])){

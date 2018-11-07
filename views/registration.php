@@ -1,24 +1,22 @@
 <html>
 
 <?php
-
+require('helpers.php');
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 	$servername = "localhost";
 	$username = "root";
 	$password = "";
 	$conn = @new mysqli($servername, $username, $password);
-	$conn->query("create database if not exists collegeCraft");
 	$conn->query("use collegeCraft");
-	$conn->query("create table if not exists users (username varchar(32), hashed_password varchar(255),  primary key(username) )");
 	$userToAdd = $_POST['usr'];
 	$pwdToAdd = $_POST['pwd'];
 	$hashedPass = crypt($pwdToAdd,'$1$salt012345');
 	$sql = "INSERT INTO users (username, hashed_password) VALUES ('$userToAdd', '$hashedPass' );";
-	#insert into permanant database
+	addUser($userToAdd,$hashedPass);
 	if($conn->query($sql) === TRUE){
 		echo "successfully added";
-		header("Location: index.php");
+		header("Location: index.php?dontreload=1");
 	}else{
 		echo "error $conn->error()";
 	}
