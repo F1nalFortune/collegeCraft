@@ -17,4 +17,20 @@ function addUser($name,$pwd){
 	$line = "INSERT INTO users (username, hashed_password) VALUES ('$name','$pwd');\n";
 	$out = file_put_contents($file, $line, FILE_APPEND);
 }
+
+
+#populate!
+function populate(){
+	for($i=0;$i<30;$i++){
+		$name = 'User' . $i;
+		$pwd = crypt("password",'$1$salt012345');
+		$bio = "Excited to join the community, meet new users, and see whats up!";
+		$email_address = 'User' . $i . '@gmail.com';
+		$file = "../sqlFiles/createCollegeCraft.sql";
+		$line = "INSERT INTO users (username, hashed_password,bio,email_address) VALUES ('$name','$pwd','$bio','$email_address');\n";
+		$out = file_put_contents($file, $line, FILE_APPEND);
+	}
+}
+
+#populate();
 ?>
