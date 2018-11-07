@@ -2,6 +2,7 @@
 	require 'helpers.php';
 	if(!isset($_GET['dontreload'])){
 		prepareDB();
+		populate();
 	}
 	#load up the database
 	if(session_status() !== PHP_SESSION_ACTIVE){

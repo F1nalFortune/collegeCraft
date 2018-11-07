@@ -21,6 +21,7 @@ function addUser($name,$pwd){
 
 #populate!
 function populate(){
+	#add sample users
 	for($i=0;$i<30;$i++){
 		$name = 'User' . $i;
 		$pwd = crypt("password",'$1$salt012345');
@@ -30,7 +31,14 @@ function populate(){
 		$line = "INSERT INTO users (username, hashed_password,bio,email_address) VALUES ('$name','$pwd','$bio','$email_address');\n";
 		$out = file_put_contents($file, $line, FILE_APPEND);
 	}
+	#add sample products
+	for($i=0;$i<30;$i++){
+		$price = rand(50,500) + rand(0,99)*.01;
+		$file = "../sqlFiles/createCollegeCraft.sql";
+		$line = "INSERT INTO product (name, description, price, category) VALUES ('PS4 new','in working condition, even has a few games.','$price' ,'gaming');\n";
+		$out = file_put_contents($file, $line, FILE_APPEND);
+	}
+	
+	
 }
-
-#populate();
 ?>
