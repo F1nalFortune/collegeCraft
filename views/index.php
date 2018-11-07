@@ -1,4 +1,7 @@
 <?php
+	require 'helpers.php';
+	prepareDB();
+	#load up the database
 	if(session_status() !== PHP_SESSION_ACTIVE){
 		session_start();
 	} #works
@@ -74,6 +77,21 @@
   }
 ?>
     <p>Log in here:
+<?php
+	$conn = @new mysqli('127.0.0.1', 'root', '');
+	$conn->query("create database if not exists collegeCraft");
+	$conn->query("use collegeCraft");
+	$command = 'mysql -uroot -h localhost -D collegeCraft < ../sqlFiles/createCollegeCraft.sql';
+	$output = shell_exec($command . '/shellexec.sql');
+	echo $output;
+	echo "^^^";
+#	$sql = "source '../sqlFiles/createCollegeCraft.sql'";
+#if ($conn->query($sql) === TRUE) {
+#    echo "New record created successfully";
+#} else {
+#    echo "Error: " . $sql . "<br>" . $conn->error;
+#}
+?>
     <br>
     <span>Username: <input type="Text" name="username"/> </span>
     <br>
