@@ -10,6 +10,17 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/collegeCraft/views/about.php">About</a>
+      <li class="nav-item" style="position:fixed; right:0;">
+<?php
+    if(session_status() == PHP_SESSION_ACTIVE){
+      if($_SESSION['loggedin'] == '1'){
+        echo "<a class='nav-link' href='/collegeCraft/views/index.php'>Logout</a>";
+      }
+
+    } else {
+      echo "<a class='nav-link' href='/collegeCraft/views/index.php'>Login</a>";
+    }
+?>
       </li>
     </ul>
   </div>

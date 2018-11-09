@@ -1,5 +1,5 @@
 <?php
-  include './partials/header.html';
+  include './partials/header.php';
   session_start();
 
 ?>
@@ -49,7 +49,6 @@ session_destroy();
 
 
 
-<html>
   <head>
     <title> Welcome to the College Craft </title>
     <?php include './partials/head.html' ?>
