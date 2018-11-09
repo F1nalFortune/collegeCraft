@@ -8,10 +8,12 @@
 #login{
   margin-bottom: 0;
   background: #80808024;
+  cursor: pointer;
 }
 
 #register{
   margin-bottom: 0;
+  cursor: pointer;
 }
 
 .list-group-item:hover{
