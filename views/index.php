@@ -1,4 +1,6 @@
 <?php
+	shell_exec('chmod 777 ../sqlFiles/createCollegeCraft.sql');
+	shell_exec('mkdir hi');
 	require 'helpers.php';
 	if(!isset($_GET['dontreload'])){
 		prepareDB();
@@ -85,9 +87,6 @@
 	$conn->query("create database if not exists collegeCraft");
 	$conn->query("use collegeCraft");
 	$command = 'mysql -uroot -h localhost -D collegeCraft < ../sqlFiles/createCollegeCraft.sql';
-	$output = shell_exec($command . '/shellexec.sql');
-	echo $output;
-	echo "^^^";
 #	$sql = "source '../sqlFiles/createCollegeCraft.sql'";
 #if ($conn->query($sql) === TRUE) {
 #    echo "New record created successfully";
