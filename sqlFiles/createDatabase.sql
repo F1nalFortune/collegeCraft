@@ -48,6 +48,7 @@ CREATE TABLE `comments` (
 
 CREATE TABLE `product` (
   `product_id` int(11) NOT NULL,
+  `name` varchar(64),
   `description` varchar(256) DEFAULT NULL,
   `category` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -164,6 +165,7 @@ ALTER TABLE `trade_ad`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
 
+
 --
 -- AUTO_INCREMENT for dumped tables
 --
@@ -197,6 +199,9 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `trade_ad`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
