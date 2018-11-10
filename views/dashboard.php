@@ -11,14 +11,44 @@
 
 	include '../connect.php';
 
-	$conn->query("create table if not exists product(
-		product_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		description varchar(255) NOT NULL,
-		price float,
-		category varchar(64) NOT NULL,
-		quantity int,
-		condition varchar(64)
-		)")
+	function fill_university($conn){
+		$tableJoin = "SELECT DISTINCT location FROM (
+			SELECT Users.location, Trade_ad.id as Trade_ID, Trade_ad.product_id, Trade_ad.price, Product.name
+									FROM Users
+									INNER JOIN Trade_ad
+									ON Users.user_id=Trade_ad.seller
+									INNER JOIN Product
+									ON Trade_ad.product_id=Product.product_id) as Full_Table";
+		$joinResult = $conn->query($tableJoin);
+
+			while($row = $joinResult->fetch_assoc()){
+				$output .= "<option value='{$row["location"]}'>{$row["location"]}</option>";
+			}
+			return $output;
+	}
+
+	function fill_ad($conn){
+		$output = '';
+		$sql = "SELECT * FROM ( SELECT Users.location, Trade_ad.id as Trade_ID, Trade_ad.product_id, Trade_ad.price, Product.name FROM Users INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller INNER JOIN Product ON Trade_ad.product_id=Product.product_id ) as Full_Ad";
+		$result = $conn->query($sql);
+
+		while($row = $result->fetch_assoc()){
+			$output .="<div class='col-sm-4' style='border: 1px solid black'>
+										<div>{$row['name']}</div>
+								</div>";
+		}
+
+		return $output;
+	}
+	//
+	// $conn->query("create table if not exists product(
+	// 	product_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	// 	description varchar(255) NOT NULL,
+	// 	price float,
+	// 	category varchar(64) NOT NULL,
+	// 	quantity int,
+	// 	condition varchar(64)
+	// 	)")
 
 ?>
 
@@ -30,8 +60,6 @@
   <?php include './partials/header.php' ?>
   <h1>Dashboard</h1>
 	<h4><?php echo "Welcome ". $_SESSION["username"]. "!";?></h4>
-	<?php
-	echo "
 <div class='container'>
 	<div class='row'>
 		<div class='col-sm-12' style='text-align: center'>
@@ -42,43 +70,21 @@
 
 		<div class='col-sm-3'>
 			<label for='university'> University </label>
-			<select id='university'>
-				<option value='Boston University'>Boston University</option>
-				<option value='Southern New Hampshire University'>Southern New Hampshire University</option>
-				<option value='University of Connecticut'>University of Connecticut</option>
-				<option value='University of Massachusetts Amherst'>University of Massachusetts Amherst</option>
-				<option value='Harvard University'>Harvard University</option>
-				<option value='Northeastern University'>Northeastern University</option>
-				<option value='University of Rhode Island'>University of Rhode Island</option>
-				<option value='University of New Hampshire Main Campus'>University of New Hampshire Main Campus</option>
-				<option value='Boston College'>Boston College</option>
-				<option value='Yale University'>Yale University</option>
+			<select name='university' id='university'>
+				<option value="">Show All University</option>
+				<?php echo fill_university($conn); ?>
 			</select>
 			<ul class='list-group'>
 			  <li class='list-group-item'>School</li>
 			  <li class='list-group-item'>Dorm</li>
 			  <li class='list-group-item'>Electronics</li>
 			  <li class='list-group-item'>Books</li>
-			  <li class='list-group-item'>ALL</li>
+			  <li class='list-group-item active'>ALL</li>
 			</ul>
 		</div>
 		<div class='col-sm-9'>
-			<div class='row'>";
-		$allProducts = $conn->query("select * from product");
-		if ($allProducts->num_rows > 0) {
-		  while($row = $allProducts->fetch_assoc()){
-				$product_id = $row['product_id'];
-				$product_name = $row['name'];
-				$product_description =$row['description'];
-				$product_category = $row['category'];
-				echo "
-					<div class='col-sm-4' style='border: 1px solid black'>
-						<p> {$row['product_id']} </p>
-					</div>
-				";
-		  }
-		}
-		echo "
+			<div class='row' id="show_ad">
+				<?php echo fill_ad($conn); ?>
 			</div>
 		</div>
 	</div>
@@ -92,9 +98,7 @@
 	  </ul>
 	</nav>
 </div>
-	";
 
-	?>
 </body>
 <script>
 for(i=0;i<document.getElementsByClassName('list-group-item').length;i++){
@@ -105,5 +109,20 @@ for(i=0;i<document.getElementsByClassName('list-group-item').length;i++){
 		$(this).removeClass('active');
 	}
 }
+
+$(document).ready(function(){
+	$('#university').change(function(){
+		var location = $(this).val();
+
+		$.ajax({
+			url:"../load_data.php",
+			method:"POST",
+			data:{location:location},
+			success:function(data){
+				$('#show_ad').html(data);
+			}
+		})
+	});
+})
 </script>
 </html>
