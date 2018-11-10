@@ -43,10 +43,16 @@
 		<div class='col-sm-3'>
 			<label for='university'> University </label>
 			<select id='university'>
-				<option value='SCSU'>SCSU</option>
-				<option value='ECSU'>ECSU</option>
-				<option value='UNH'>UNH</option>
-				<option value='QUINNIPIAC'>QUINNIPIAC</option>
+				<option value='Boston University'>Boston University</option>
+				<option value='Southern New Hampshire University'>Southern New Hampshire University</option>
+				<option value='University of Connecticut'>University of Connecticut</option>
+				<option value='University of Massachusetts Amherst'>University of Massachusetts Amherst</option>
+				<option value='Harvard University'>Harvard University</option>
+				<option value='Northeastern University'>Northeastern University</option>
+				<option value='University of Rhode Island'>University of Rhode Island</option>
+				<option value='University of New Hampshire Main Campus'>University of New Hampshire Main Campus</option>
+				<option value='Boston College'>Boston College</option>
+				<option value='Yale University'>Yale University</option>
 			</select>
 			<ul class='list-group'>
 			  <li class='list-group-item'>School</li>
@@ -62,8 +68,8 @@
 		if ($allProducts->num_rows > 0) {
 		  while($row = $allProducts->fetch_assoc()){
 				$product_id = $row['product_id'];
+				$product_name = $row['name'];
 				$product_description =$row['description'];
-				$product_price = $row['price'];
 				$product_category = $row['category'];
 				echo "
 					<div class='col-sm-4' style='border: 1px solid black'>
