@@ -75,11 +75,11 @@
 				<?php echo fill_university($conn); ?>
 			</select>
 			<ul class='list-group'>
-			  <li onclick="document.getElementById('category').innerHTML = 'school'" class='list-group-item'>School</li>
-			  <li onclick="document.getElementById('category').innerHTML = 'dorm'" class='list-group-item'>Dorm</li>
-			  <li onclick="document.getElementById('category').innerHTML = 'electronics'" class='list-group-item'>Electronics</li>
-			  <li onclick="document.getElementById('category').innerHTML = 'books'" class='list-group-item'>Books</li>
-			  <li onclick="document.getElementById('category').innerHTML = ''" class='list-group-item active'>ALL</li>
+			  <li class='list-group-item'>School</li>
+			  <li class='list-group-item'>Dorm</li>
+			  <li class='list-group-item'>Electronics</li>
+			  <li class='list-group-item'>Books</li>
+			  <li class='list-group-item active'>ALL</li>
 			</ul>
 		</div>
 		<div class='col-sm-9'>
@@ -101,15 +101,6 @@
 
 </body>
 <script>
-// for(i=0;i<document.getElementsByClassName('list-group-item').length;i++){
-// 	document.getElementsByClassName('list-group-item')[i].onmouseover = function(){
-// 		$(this).addClass('active');
-// 	}
-// 	document.getElementsByClassName('list-group-item')[i].onmouseout = function(){
-// 		$(this).removeClass('active');
-// 	}
-// }
-
 $(document).ready(function(){
 	$('#university').change(function(){
 		var location = $(this).val();
@@ -136,6 +127,18 @@ $(document).ready(function(){
 			}
 		})
 	});
+	// TODO search field
+	// $('#search').change(function(){
+	// 	var location = $("#university").val();
+	// 	$.ajax({
+	// 		url:"../load_data.php",
+	// 		method:"POST",
+	// 		data:{location:location, category:category},
+	// 		success:function(data){
+	// 			$('#show_ad').html(data);
+	// 		}
+	// 	})
+	// });
 })
 </script>
 </html>
