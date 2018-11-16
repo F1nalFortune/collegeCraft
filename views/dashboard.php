@@ -34,8 +34,8 @@
 
 		while($row = $result->fetch_assoc()){
 			$output .="<div class='col-sm-4' style='border: 1px solid black'>
-										<div>{$row['name']}</div>
-								</div>";
+	                  <div><a href='item.php?sku={$row['Trade_ID']}'>{$row['name']}</div>
+	              </div>";
 		}
 
 		return $output;
