@@ -47,7 +47,7 @@ if(isset($location)){
 
   while($row = $result->fetch_assoc()){
     $output .= "<div class='col-sm-4' style='border: 1px solid black'>
-                  <div><a href='item.php?sku={$row['Trade_ID']}'>{$row['name']}</div>
+                  <div><a href='item.php?item={$row['Trade_ID']}'>{$row['name']}</div>
               </div>";
   }
 
