@@ -1,6 +1,19 @@
 <?php
+$conn = @new mysqli('127.0.0.1', 'root', '');
+$myfile = fopen("../sqlFiles/seededDatabase.sql", "r") or die("Unable to open file!");
+$stmts = fread($myfile,filesize("../sqlFiles/seededDatabase.sql"));
+fclose($myfile);
+// $conn = @new mysqli('127.0.0.1', 'root', '', 'collegeCraft');
+if ($conn->multi_query($stmts) === TRUE) {
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
   include './partials/header.php';
   session_start();
+  shell_exec('chmod 777 ../sqlFiles/seededDatabase.sql');
+
+
 
 ?>
 
@@ -12,7 +25,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $_SESSION["password"] = $_POST['password'];
         $pass = crypt($_SESSION["password"],'$1$salt012345'); #cmp with stored
         $user = $_SESSION["username"];
-        $conn = @new mysqli('127.0.0.1', 'root', '');
 	$conn->query("create database if not exists collegeCraft");
 	$conn->query("use collegeCraft");
 	$conn->query("create table if not exists users (username varchar(32), hashed_password varchar(255),  primary key(username) )");
