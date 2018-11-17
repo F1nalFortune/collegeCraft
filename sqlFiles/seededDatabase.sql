@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2018 at 02:08 AM
+-- Generation Time: Nov 17, 2018 at 09:44 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 DROP DATABASE IF EXISTS collegeCraft;
 CREATE DATABASE IF NOT EXISTS collegeCraft;
 USE collegeCraft;
-DROP TABLE IF EXISTS users, roles, product, comments, sells, reputation, trade_ad, review;
+DROP TABLE IF EXISTS users, roles, product, comments, sells, reputation, trade_ad, review, trade_request;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -853,6 +853,36 @@ INSERT INTO `trade_ad` (`id`, `product_id`, `price`, `qty`, `seller`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `trade_request`
+--
+
+CREATE TABLE `trade_request` (
+  `id` int(11) NOT NULL,
+  `seller` int(11) DEFAULT NULL,
+  `buyer` int(11) DEFAULT NULL,
+  `request` int(11) DEFAULT NULL,
+  `offer` int(11) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `cash` tinyint(1) DEFAULT NULL,
+  `trade` tinyint(1) DEFAULT NULL,
+  `COMMENT` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trade_request`
+--
+
+INSERT INTO `trade_request` (`id`, `seller`, `buyer`, `request`, `offer`, `price`, `cash`, `trade`, `COMMENT`) VALUES
+(1, 4, 4, 4, 3, 1, 1, 0, 'asdf'),
+(2, 17, 102, 17, 2, 99, 0, 1, 'asdf'),
+(3, 17, 102, 17, 2, 99, 0, 1, 'asdfa'),
+(4, 17, 102, 17, 2, 99, 1, 0, ''),
+(5, 15, 102, 15, 2, 48, 0, 1, 'asdfasdf'),
+(6, 15, 102, 15, 2, 48, 0, 1, 'asdfasdf');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -1023,6 +1053,16 @@ ALTER TABLE `trade_ad`
   ADD KEY `TRADE_Seller` (`seller`);
 
 --
+-- Indexes for table `trade_request`
+--
+ALTER TABLE `trade_request`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `seller` (`seller`),
+  ADD KEY `buyer` (`buyer`),
+  ADD KEY `request` (`request`),
+  ADD KEY `offer` (`offer`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -1069,6 +1109,12 @@ ALTER TABLE `trade_ad`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
+-- AUTO_INCREMENT for table `trade_request`
+--
+ALTER TABLE `trade_request`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -1097,6 +1143,15 @@ ALTER TABLE `reputation`
 ALTER TABLE `trade_ad`
   ADD CONSTRAINT `TRADE_Product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
   ADD CONSTRAINT `TRADE_Seller` FOREIGN KEY (`seller`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `trade_request`
+--
+ALTER TABLE `trade_request`
+  ADD CONSTRAINT `trade_request_ibfk_1` FOREIGN KEY (`seller`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `trade_request_ibfk_2` FOREIGN KEY (`buyer`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `trade_request_ibfk_3` FOREIGN KEY (`request`) REFERENCES `trade_ad` (`id`),
+  ADD CONSTRAINT `trade_request_ibfk_4` FOREIGN KEY (`offer`) REFERENCES `trade_ad` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
