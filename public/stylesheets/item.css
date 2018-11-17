@@ -20,3 +20,7 @@ span.stars span {
 #trade-pic{
   width: 100%;
 }
+
+.hide{
+  display: none;
+}
