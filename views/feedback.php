@@ -8,7 +8,8 @@
   $user = $_GET['user'];
 
   // GRAB USER FEEDBACK INFO
-  // GET BUYERS USERNAME
+
+
   $info = "  SELECT review.id, review.review, review.trade_id, review.feedback, review.created, review.buyer, trade_ad.product_id, trade_ad.price, trade_ad.qty, trade_ad.seller, product.name, users.username
   FROM review
   INNER JOIN Trade_ad ON review.trade_id=Trade_ad.id
@@ -54,6 +55,8 @@
       </div>
       <?php
       while($row = $result->fetch_assoc()){
+          // GET BUYERS USERNAME
+        $buyer = $conn->query("SELECT username from users where user_id={$row['buyer']}");
         echo "
         <div class='col-sm-1 offset-sm-1'>
           <span class='stars'>{$row['review']}</span>
@@ -63,8 +66,12 @@
           <p>{$row['name']}</p>
         </div>
         <div class='col-sm-2'>
-          <p>Buyer: {$row['username']}</p>
-          <p>{$row['price']}
+          <p>Buyer: ";
+          while($data = $buyer->fetch_assoc()){
+            echo $data['username'];
+          }
+        echo "</p>
+          <p>$ {$row['price']}
         </div>
         <div class='col-sm-2'>
           <p>{$row['created']}</p>
