@@ -60,6 +60,4 @@ INSERT INTO users (username, hashed_password) VALUES ('aaaa','$1$salt0123$DDmlS/
 INSERT INTO users (username, hashed_password) VALUES ('aaaaaa','$1$salt0123$01QCUmrv4.Ao3hQdGHB6c1');
 INSERT INTO users (username, hashed_password) VALUES ('hello','$1$salt0123$3vhIeCFYVtADi.UiQs3Ae/');
 INSERT INTO users (username, hashed_password) VALUES ('zebra','$1$salt0123$N8X1JXgNGT5iFOZslL0N90');
-INSERT INTO users (username, hashed_password) VALUES ('admin','$1$salt0123$O7peeN/6eCXL0x9F/yb.81');
-INSERT INTO users (username, hashed_password) VALUES ('admin','$1$salt0123$O7peeN/6eCXL0x9F/yb.81');
-INSERT INTO users (username, hashed_password) VALUES ('admin','$1$salt0123$O7peeN/6eCXL0x9F/yb.81');
+INSERT INTO users (username, hashed_password) VALUES ('newbie','$1$salt0123$et3lF93ivaqsh6y4U2Sm.1');
