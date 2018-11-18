@@ -4,3 +4,10 @@
 .fa-times-circle{
   color: red;
 }
+
+.fa-check-circle:hover{
+  cursor: pointer;
+}
+.fa-times-circle:hover{
+  cursor:pointer;
+}

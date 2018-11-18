@@ -1,5 +1,5 @@
 <?php
-
+include 'requiredAuth.php';
 include 'connect.php';
 $output = '';
 $category = $_POST['category'];

@@ -7,9 +7,14 @@ $seller = $_POST['seller'];
 $complete = $_POST['complete'];
 if(isset($buyer)){
   if($buyer != ''){
-    $sql = "SELECT * from trade_request where buyer = {$buyer} AND complete=0";
+    $sql = "SELECT trade_request.id, trade_request.seller, trade_request.buyer, trade_request.request, trade_request.offer, trade_request.price, trade_request.cash, trade_request.trade, trade_request.comment, trade_request.complete, users.username
+from trade_request
+INNER JOIN users on trade_request.buyer=users.user_id
+WHERE buyer = {$buyer} and complete=0";
   } else if($seller != ''){
-    $sql = "SELECT * from trade_request where seller = {$seller} AND complete=0";
+    $sql = "SELECT trade_request.id, trade_request.seller, trade_request.buyer, trade_request.request, trade_request.offer, trade_request.price, trade_request.cash, trade_request.trade, trade_request.comment, trade_request.complete, users.username
+from trade_request
+INNER JOIN users on trade_request.buyer=users.user_id where seller = {$seller} AND complete=0";
   } else if ($complete != ''){
     $sql = "(SELECT * from trade_request where seller = {$complete} AND complete=1) union (SELECT * from trade_request where buyer = {$complete} AND complete=1)";
   } else {
@@ -23,6 +28,11 @@ if(isset($buyer)){
       if($row['cash']==0){
         $output .="
         <div class='row' style='border: 1px solid black'>
+          <div class='col-sm-7'>
+            <h6>{$row['username']} is requesting...</h6>
+          </div>
+          <div class='col-sm-5'>
+          </div>
           <div class='col-sm-3'>
             <p>Requesting item # {$row['request']}</p>
           </div>
@@ -42,6 +52,11 @@ if(isset($buyer)){
       } else {
         $output .="
         <div class='row' style='border: 1px solid black'>
+          <div class='col-sm-7'>
+            <h6>{$row['username']} is requesting...</h6>
+          </div>
+          <div class='col-sm-5'>
+          </div>
           <div class='col-sm-3'>
             <p>Requesting item # {$row['request']}</p>
           </div>
@@ -60,6 +75,7 @@ if(isset($buyer)){
         </div>";
       }
     }
+
   } else {
     while($row = $result->fetch_assoc()){
       if($row['cash']==0){

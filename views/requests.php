@@ -2,13 +2,15 @@
 
 <?php
 	session_start();
-	include '../requiredAuth.php';
+
 	include '../connect.php';
 
   //GET REQUEST
   if(isset($_GET['outgoing'])){
     $outgoing = $_GET['outgoing'];
   }
+
+	//FILL REQUESTS
   function fill_requests($conn){
     //GET USER ID
     $user_query = "SELECT user_id from users where username = '{$_SESSION['username']}'";
@@ -17,13 +19,20 @@
       $user_id = $a['user_id'];
     }
     $output = '';
-    $sql = "SELECT * from trade_request where seller = {$user_id} AND complete=0";
+    $sql = "SELECT trade_request.id, trade_request.seller, trade_request.buyer, trade_request.request, trade_request.offer, trade_request.price, trade_request.cash, trade_request.trade, trade_request.comment, trade_request.complete, users.username
+from trade_request
+INNER JOIN users on trade_request.buyer=users.user_id where seller = {$user_id} AND complete=0";
     $result = $conn->query($sql);
 
     while($row = $result->fetch_assoc()){
 			$view = $row['id'];
       if($row['cash']==0){
         $output .="<div class='row' style='border: 1px solid black'>
+											<div class='col-sm-7'>
+												<h6>{$row['username']} is requesting...</h6>
+											</div>
+											<div class='col-sm-5'>
+											</div>
                       <div class='col-sm-3'>
                         <p>Requesting item # {$row['request']}</p>
                       </div>
@@ -43,6 +52,11 @@
       } else {
         $output .="
                   <div class='row' style='border: 1px solid black'>
+											<div class='col-sm-7'>
+												<h6>{$row['username']} is requesting...</h6>
+											</div>
+											<div class='col-sm-5'>
+											</div>
                       <div class='col-sm-3'>
                         <p>Requesting item # {$row['request']}</p>
                       </div>
@@ -89,19 +103,10 @@
       </div>
     </div>
   </div>
-    <?php
-      $sql = "SELECT * from trade_request where seller = {$user_id} AND complete=0";
-      $result = $conn->query($sql);
-      while($row = $result->fetch_assoc()){
-
-      }
-    ?>
-
-
 
 </body>
 <script>
-
+//FILTER ALL REQUESTS
   $('.list-group-item').click(function(){
     $(this).addClass('active').siblings().removeClass('active');
       var buyer = '';
@@ -124,35 +129,44 @@
     })
   });
 
-		//ACCEPT REQUEST
-	  $('.fa-check-circle').click(function(){
+	//ACCEPT REQUEST
+  $('.fa-check-circle').click(function(){
+		var y = confirm("Press OK to confirm.");
+		if (y == true){
 			var id= $(this).attr("id");
 			var parent = $(this).parent();
-			console.log(id);
-	    $.ajax({
-	      url:"../accept_request.php",
-	      method:"POST",
-	      data:{id:id},
-	      success:function(data){
-
-	        $(parent).html("Successfully Confirmed");
-	      }
-	    })
-	  });
-
-
-		//DELETE REQUEST
-		$('.fa-times-circle').click(function(){
-			var id= $(this).attr("id");
 			$.ajax({
-				url:"../delete_request.php",
+				url:"../accept_request.php",
 				method:"POST",
 				data:{id:id},
 				success:function(data){
-					console.log('deleted');
-					// $(this).attr("id").html("Successfully Deleted");
+
+					$(parent).html("Successfully Confirmed");
 				}
 			})
+		} else {
+			console.log('Customer did not accept Request');
+		}
+  });
+
+
+		// DELETE REQUEST
+		$('.fa-times-circle').click(function(){
+			var x = confirm("Press OK to delete.");
+			if (x == true){
+				var id= $(this).attr("id");
+				var parent = $(this).parent();
+				$.ajax({
+					url:"../delete_request.php",
+					method:"POST",
+					data:{id:id},
+					success:function(data){
+						$(parent).html("Successfully Deleted");
+					}
+				})
+			} else {
+				console.log('Customer did not delete Request');
+			}
 		});
 </script>
 
