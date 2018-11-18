@@ -2,7 +2,6 @@
 <?php
 	session_start();
 
-	include '../requiredAuth.php';
 	include '../connect.php';
 
 	function fill_university($conn){

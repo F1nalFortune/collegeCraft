@@ -180,33 +180,38 @@
 
 
   	$('#submittrade').click(function(){
-      document.getElementById('purchase').disabled = true;
-      document.getElementById('trade').disabled = true;
-      var request= parseInt(<?php echo $item ?>);
-      var comment= $("#comment").val();
-      var offer = parseInt($("#trade-offer").val());
-      var price = parseInt($("#price").val());
-      var seller = parseInt(<?php echo $seller_id ?>);
-      var buyer = parseInt(<?php echo $user_id ?>);
-      var cash = 0;
-      var trade = 1;
-  		$.ajax({
-  			url:"./requestTrade.php",
-  			method:"POST",
-  			data:{
-          request:request,
-          comment:comment,
-          offer:offer,
-          price:price,
-          seller:seller,
-          buyer:buyer,
-          cash:cash,
-          trade:trade},
-  			success:function(data){
-  				$('#trade-form').html("Thank you"
-          );
-  			}
-  		});
+      var a = confirm("Are you sure?");
+      if (a == true){
+        document.getElementById('purchase').disabled = true;
+        document.getElementById('trade').disabled = true;
+        var request= parseInt(<?php echo $item ?>);
+        var comment= $("#comment").val();
+        var offer = parseInt($("#trade-offer").val());
+        var price = parseInt($("#price").val());
+        var seller = parseInt(<?php echo $seller_id ?>);
+        var buyer = parseInt(<?php echo $user_id ?>);
+        var cash = 0;
+        var trade = 1;
+        $.ajax({
+          url:"./requestTrade.php",
+          method:"POST",
+          data:{
+            request:request,
+            comment:comment,
+            offer:offer,
+            price:price,
+            seller:seller,
+            buyer:buyer,
+            cash:cash,
+            trade:trade},
+            success:function(data){
+              $('#trade-form').html("Thank you"
+            );
+          }
+        });
+      } else {
+        console.log('Customer did not want to trade');
+      }
   	});
 
 
