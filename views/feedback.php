@@ -7,17 +7,33 @@
 
   // GRAB USER ID FROM URL
   $user = $_GET['user'];
+  //GET USERNAME
+  $get_info = "SELECT username from users where user_id={$user}";
+  $resultz = $conn->query($get_info);
+  while($a = $resultz->fetch_assoc()){
+    $feedback_user = $a['username'];
+  }
 
   // GRAB USER FEEDBACK INFO
-
-
-  $info = "  SELECT review.id, review.review, review.trade_id, review.feedback, review.created, review.buyer, trade_ad.product_id, trade_ad.price, trade_ad.qty, trade_ad.seller, product.name, users.username
+  $info = "SELECT review.id, review.review, review.trade_id, review.feedback, review.created, review.buyer, trade_ad.product_id, trade_ad.price, trade_ad.qty, trade_ad.seller, product.name, users.username
   FROM review
   INNER JOIN Trade_ad ON review.trade_id=Trade_ad.id
   INNER JOIN product ON trade_ad.product_id=product.product_id
   INNER JOIN users ON users.user_id=trade_ad.seller
   WHERE seller = {$user}";
   $result = $conn->query($info);
+
+
+  // GRAB USER RATING
+  $user_rating = "SELECT average_review from(select avg(review) as average_review, users.username, trade_ad.id, trade_ad.seller
+                  from review
+                  INNER JOIN trade_ad ON review.trade_id=trade_ad.id
+                  INNER JOIN users ON trade_ad.seller=users.user_id
+                  where seller={$user}) as average";
+  $user_rating_result = $conn->query($user_rating);
+  while($b = $user_rating_result->fetch_assoc()){
+    $review = $b['average_review'];
+  }
 
 
  ?>
@@ -32,6 +48,32 @@
         <a href='javascript:history.go(-1)'>
           <-Back to previous page
         </a>
+      </div>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <h3>Feedback</h3>
+        </div>
+        <div class='container'>
+          <div class='row'>
+            <div class='col-sm-8'>
+              <div class='card'>
+                <?php
+                echo $feedback_user;
+                echo "
+                <span class='stars'>{$review}</span>
+                ";
+                ?>
+              </div>
+            </div>
+            <div class='col-sm-4'>
+              <div class='card'>
+                <a href='#'>Contact</a>
+                <a href='#'>View Profile</a>
+                <a href='#'>View Items</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     <div class='row' style='padding-bottom: 2%;'>
       <div class='col-sm-5 myborder'>
