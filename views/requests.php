@@ -21,6 +21,7 @@
     $result = $conn->query($sql);
 
     while($row = $result->fetch_assoc()){
+			$view = $row['id'];
       if($row['cash']==0){
         $output .="<div class='row' style='border: 1px solid black'>
                       <div class='col-sm-3'>
@@ -33,8 +34,10 @@
                         <p>Offering item # {$row['offer']}</p>
                       </div>
                       <div class='col-sm-5'>
-												<i id='{$row['id']}' class='far fa-check-circle fa-2x'></i>
-												<i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
+												<div>
+													<i id='{$row['id']}' class='far fa-check-circle fa-2x'></i>
+													<i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
+												</div>
                       </div>
                   </div>";
       } else {
@@ -50,8 +53,10 @@
                         <p>$ {$row['price']}</p>
                       </div>
                       <div class='col-sm-5'>
-												<i id='{$row['id']}' class='far fa-check-circle fa-2x'></i>
-												<i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
+												<div>
+													<i id='{$row['id']}' class='far fa-check-circle fa-2x'></i>
+													<i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
+												</div>
                       </div>
                   </div>";
 
@@ -119,20 +124,24 @@
     })
   });
 
+		//ACCEPT REQUEST
 	  $('.fa-check-circle').click(function(){
 			var id= $(this).attr("id");
+			var parent = $(this).parent();
 			console.log(id);
 	    $.ajax({
 	      url:"../accept_request.php",
 	      method:"POST",
 	      data:{id:id},
 	      success:function(data){
-					console.log('successfully confirmed');
-	        // .html("Successfully Confirmed");
+
+	        $(parent).html("Successfully Confirmed");
 	      }
 	    })
 	  });
 
+
+		//DELETE REQUEST
 		$('.fa-times-circle').click(function(){
 			var id= $(this).attr("id");
 			$.ajax({

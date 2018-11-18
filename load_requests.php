@@ -33,8 +33,10 @@ if(isset($buyer)){
             <p>Offering item # {$row['offer']}</p>
           </div>
           <div class='col-sm-5'>
-            <i id='{$row['id']}' class='far fa-check-circle fa-2x'></i>
-            <i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
+            <div>
+              <i id='{$row['id']}' class='far fa-check-circle fa-2x'></i>
+              <i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
+            </div>
           </div>
         </div>";
       } else {
@@ -50,8 +52,10 @@ if(isset($buyer)){
             <p>$ {$row['price']}</p>
           </div>
           <div class='col-sm-5'>
-            <i id='{$row['id']}' class='far fa-check-circle fa-2x'></i>
-            <i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
+            <div>
+              <i id='{$row['id']}' class='far fa-check-circle fa-2x'></i>
+              <i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
+            </div>
           </div>
         </div>";
       }
