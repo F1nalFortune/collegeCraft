@@ -1,14 +1,8 @@
 <html>
 <?php
 	session_start();
-	// if(isset($_SESSION['loggedin'])){
-	// 	echo "not logged in";
-	// 	header("Location: index.php?notlogged='1'");
-	// }
-	if($_SESSION["loggedin"] != "1"){
-		header("Location: index.php?notlogged='1'");
-	}
 
+	include '../requiredAuth.php';
 	include '../connect.php';
 
 	function fill_university($conn){

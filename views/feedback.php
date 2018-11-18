@@ -2,6 +2,7 @@
 
   session_start();
 
+  include '../requiredAuth.php';
   include '../connect.php';
 
   // GRAB USER ID FROM URL

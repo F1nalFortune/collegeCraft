@@ -1,6 +1,7 @@
 <?php
   session_start();
 
+  include '../requiredAuth.php';
   include '../connect.php';
 
   // GRAB ITEM ID FROM URL

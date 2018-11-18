@@ -49,8 +49,8 @@ if(isset($_SESSION['loggedin'])){
           </span>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Incoming Requests</a>
-          <a class="dropdown-item" href="#">Outgoing Requests</a>
+          <a class="dropdown-item" href="/collegeCraft/views/requests.php">Incoming Requests</a>
+          <a class="dropdown-item" href="/collegeCraft/views/requests.php?outgoing=true">Outgoing Requests</a>
         </div>
       </li>
     <?php
