@@ -1,4 +1,5 @@
 <html>
+
 <?php
 	session_start();
 	include '../requiredAuth.php';
@@ -32,8 +33,8 @@
                         <p>Offering item # {$row['offer']}</p>
                       </div>
                       <div class='col-sm-5'>
-                        <p>check</p>
-                        <p>x</p>
+												<i id='{$row['id']}' class='far fa-check-circle fa-2x'></i>
+												<i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
                       </div>
                   </div>";
       } else {
@@ -49,8 +50,8 @@
                         <p>$ {$row['price']}</p>
                       </div>
                       <div class='col-sm-5'>
-                        <p>check</p>
-                        <p>x</p>
+												<i id='{$row['id']}' class='far fa-check-circle fa-2x'></i>
+												<i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
                       </div>
                   </div>";
 
@@ -62,6 +63,7 @@
 ?>
 <head>
   <?php include './partials/head.html' ?>
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/requests.css">
 </head>
 <body>
   <?php include './partials/header.php' ?>
@@ -116,6 +118,33 @@
       }
     })
   });
+
+	  $('.fa-check-circle').click(function(){
+			var id= $(this).attr("id");
+			console.log(id);
+	    $.ajax({
+	      url:"../accept_request.php",
+	      method:"POST",
+	      data:{id:id},
+	      success:function(data){
+					console.log('successfully confirmed');
+	        // .html("Successfully Confirmed");
+	      }
+	    })
+	  });
+
+		$('.fa-times-circle').click(function(){
+			var id= $(this).attr("id");
+			$.ajax({
+				url:"../delete_request.php",
+				method:"POST",
+				data:{id:id},
+				success:function(data){
+					console.log('deleted');
+					// $(this).attr("id").html("Successfully Deleted");
+				}
+			})
+		});
 </script>
 
 <?php

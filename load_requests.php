@@ -16,44 +16,82 @@ if(isset($buyer)){
 
   }
 
+
   $result = $conn->query($sql);
-
-  while($row = $result->fetch_assoc()){
-    if($row['cash']==0){
-      $output .="<div class='row' style='border: 1px solid black'>
-                    <div class='col-sm-3'>
-                      <p>Requesting item # {$row['request']}</p>
-                    </div>
-                    <div class='col-sm-1'>
-                      FOR
-                    </div>
-                    <div class='col-sm-3'>
-                      <p>Offering item # {$row['offer']}</p>
-                    </div>
-                    <div class='col-sm-5'>
-                      <p>check</p>
-                      <p>x</p>
-                    </div>
-                </div>";
-    } else {
-      $output .="
-                <div class='row' style='border: 1px solid black'>
-                    <div class='col-sm-3'>
-                      <p>Requesting item # {$row['request']}</p>
-                    </div>
-                    <div class='col-sm-1'>
-                      FOR
-                    </div>
-                    <div class='col-sm-3'>
-                      <p>$ {$row['price']}</p>
-                    </div>
-                    <div class='col-sm-5'>
-                      <p>check</p>
-                      <p>x</p>
-                    </div>
-                </div>";
-
+  if($seller !=''){
+    while($row = $result->fetch_assoc()){
+      if($row['cash']==0){
+        $output .="
+        <div class='row' style='border: 1px solid black'>
+          <div class='col-sm-3'>
+            <p>Requesting item # {$row['request']}</p>
+          </div>
+          <div class='col-sm-1'>
+            FOR
+          </div>
+          <div class='col-sm-3'>
+            <p>Offering item # {$row['offer']}</p>
+          </div>
+          <div class='col-sm-5'>
+            <i id='{$row['id']}' class='far fa-check-circle fa-2x'></i>
+            <i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
+          </div>
+        </div>";
+      } else {
+        $output .="
+        <div class='row' style='border: 1px solid black'>
+          <div class='col-sm-3'>
+            <p>Requesting item # {$row['request']}</p>
+          </div>
+          <div class='col-sm-1'>
+            FOR
+          </div>
+          <div class='col-sm-3'>
+            <p>$ {$row['price']}</p>
+          </div>
+          <div class='col-sm-5'>
+            <i id='{$row['id']}' class='far fa-check-circle fa-2x'></i>
+            <i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
+          </div>
+        </div>";
+      }
     }
+  } else {
+    while($row = $result->fetch_assoc()){
+      if($row['cash']==0){
+        $output .="
+        <div class='row' style='border: 1px solid black'>
+          <div class='col-sm-4 offset-sm-1'>
+            <p>Requesting item # {$row['request']}</p>
+          </div>
+          <div class='col-sm-2'>
+            FOR
+          </div>
+          <div class='col-sm-4'>
+            <p>Offering item # {$row['offer']}</p>
+          </div>
+          <div class='col-sm-1'>
+          </div>
+        </div>";
+      } else {
+        $output .="
+        <div class='row' style='border: 1px solid black'>
+          <div class='col-sm-4 offset-sm-1'>
+            <p>Requesting item # {$row['request']}</p>
+          </div>
+          <div class='col-sm-2'>
+            FOR
+          </div>
+          <div class='col-sm-4'>
+            <p>$ {$row['price']}</p>
+          </div>
+          <div class='col-sm-1'>
+          </div>
+        </div>";
+
+      }
+    }
+
   }
 
   echo $output;
