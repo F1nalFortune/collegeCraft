@@ -11,6 +11,5 @@
 
     Celebrate success right, the only way, apple. Surround yourself with angels. Special cloth alert. The first of the month is coming, we have to get money, we have no choice. It cost money to eat and they don’t want you to eat. Congratulations, you played yourself. Major key, don’t fall for the trap, stay focused. It’s the ones closest to you that want to see you fail. Mogul talk. Find peace, life is like a water fall, you’ve gotta flow. We the best. The key is to drink coconut, fresh coconut, trust me. The weather is amazing, walk with me through the pathway of more success. Take this journey with me, Lion!
   </p>
-  <i class='fas fa-user-tie'></i>
 </body>
 </html>

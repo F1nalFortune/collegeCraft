@@ -37,39 +37,32 @@ if(isset($_SESSION['loggedin'])){
       </li>
     </ul>
   </div>
-  <ul style='float:right; list-style:none;' class='dots row'>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class='fas fa-user-tie' style=''>
-            <?php
-              if(isset($_SESSION['loggedin'])){
-                echo $count;
-              }
-            ?>
-          </span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/collegeCraft/views/requests.php">Incoming Requests</a>
-          <a class="dropdown-item" href="/collegeCraft/views/requests.php?outgoing=true">Outgoing Requests</a>
-        </div>
-      </li>
-    <?php
+  <?php
     if(session_status() == PHP_SESSION_ACTIVE){
-      if($_SESSION['loggedin'] == '1'){
-
-        echo "
-        <li class='nav-item' style=''>
-        <a class='nav-link' href='/collegeCraft/views/index.php'>Logout</a>
-        </li>
-        ";
-      }
-
-    } else {
-      echo "<li class='nav-item' style=''>
-      <a class='nav-link' href='/collegeCraft/views/index.php'>Login</a>
-      </li>";
-    }
-    ?>
-
-  </ul>
+      echo"
+      <ul style='float:right; list-style:none;' class='dots row'>
+          <li class='nav-item dropdown'>
+            <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+              <span class='fas fa-user-tie' style=''>
+                    {$count}
+              </span>
+            </a>
+            <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+              <a class='dropdown-item' href='/collegeCraft/views/requests.php'>Incoming Requests</a>
+              <a class='dropdown-item' href='/collegeCraft/views/requests.php?outgoing=true'>Outgoing Requests</a>
+            </div>
+          </li>
+          <li class='nav-item' style=''>
+            <a class='nav-link' href='/collegeCraft/views/index.php'>Logout</a>
+          </li>
+      </ul>";
+        } else {
+          echo "
+      <ul style='float:right; list-style:none;'>
+          <li class='nav-item' style=''>
+            <a class='nav-link' href='/collegeCraft/views/index.php'>Login</a>
+          </li>
+      </ul>";
+        }
+        ?>
 </nav>
