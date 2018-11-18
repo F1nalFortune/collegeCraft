@@ -80,7 +80,7 @@
       <div class='col-sm-3 card'>
         <h4>Seller Information</h4>
         <div>
-          <p>{$username}<a href='feedback.php?user={$row['user_id']}'><span class='stars'>{$review}</span></a></p>
+          <p>{$row['username']}<a href='feedback.php?user={$row['user_id']}'><span class='stars'>{$review}</span></a></p>
         </div>
 
         <a href='#'>Contact</a><br/>

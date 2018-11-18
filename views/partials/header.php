@@ -6,15 +6,15 @@ include '../connect.php';
 if(isset($_SESSION['loggedin'])){
   $user_query = "SELECT user_id from users where username = '{$_SESSION['username']}'";
   $user_result = $conn->query($user_query);
-  while($row = $user_result->fetch_assoc()){
-    $user_id = $row['user_id'];
+  while($a = $user_result->fetch_assoc()){
+    $user_id = $a['user_id'];
   }
 
 //TODO fix requests so that only shows uncompleted
   $requests = "SELECT count(*) from trade_request where seller = {$user_id}";
   $requests_result = $conn->query($requests);
-  while($row = $requests_result->fetch_assoc()){
-    $count = $row['count(*)'];
+  while($b = $requests_result->fetch_assoc()){
+    $count = $b['count(*)'];
   }
 
 }
