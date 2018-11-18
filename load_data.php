@@ -52,6 +52,9 @@ if(isset($location)){
   }
 
   echo $output;
+  if ($output === ''){
+    echo "0 results";
+  }
 } else {
   echo "location not set";
 }

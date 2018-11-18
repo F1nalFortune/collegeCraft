@@ -116,8 +116,19 @@
       }
     })
   });
-  if(<?php echo $outgoing; ?> === true){
+</script>
+
+<?php
+if(isset($_GET['outgoing'])){
+  $outgoing = $_GET['outgoing'];
+  echo "
+  <script>
+  if ({$outgoing}===true){
     document.getElementById('outgoing').click();
   }
-</script>
+  </script>
+  ";
+
+}
+?>
 </html>
