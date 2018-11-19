@@ -85,6 +85,16 @@
       </div>
     </div>
     <div class='row'>
+      <div class='col-sm-12'>
+        <p style='float: right;padding-right: 5%;'>Sort By
+          <select name='sort' id='sort'>
+            <option value="recent">Recent</option>
+            <option value="oldest">Oldest</option>
+            <option value="best">Best Review</option>
+            <option value="worst">Worst Review</option>
+          </select>
+        </p>
+      </div>
       <div class='col-sm-6 offset-sm-1'>
         <strong>Feedback</strong>
       </div>
@@ -96,6 +106,7 @@
       </div>
       <div class='col-sm-1'>
       </div>
+      <div id='show_sort' class='row'>
       <?php
       while($row = $result->fetch_assoc()){
           // GET BUYERS USERNAME
@@ -125,7 +136,7 @@
         ";
       }
         ?>
-
+      </div>
     </div>
 
   </body>
@@ -145,6 +156,20 @@
 
     $(function() {
       $('span.stars').stars();
+    });
+
+
+    $('#sort').change(function(){
+      var sort = $(this).val();
+      var user = <?php echo $user; ?>;
+      $.ajax({
+        url:"../sort_feedback.php",
+        method:"POST",
+        data:{sort:sort, user:user},
+        success:function(data){
+          $('#show_sort').html(data);
+        }
+      })
     });
   </script>
 
