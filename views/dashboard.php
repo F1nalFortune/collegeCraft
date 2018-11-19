@@ -57,7 +57,7 @@
 	<div class='row'>
 		<div class='col-sm-12' style='text-align: center'>
 			<p> Search for Item</p>
-			<input type='text' placeholder='search'/>
+			<input id='search' type='text' placeholder='search'/>
 			<input type='submit' value='submit'>
 		</div>
 
@@ -120,18 +120,20 @@ $(document).ready(function(){
 			}
 		})
 	});
-	// TODO search field
-	// $('#search').change(function(){
-	// 	var location = $("#university").val();
-	// 	$.ajax({
-	// 		url:"../load_data.php",
-	// 		method:"POST",
-	// 		data:{location:location, category:category},
-	// 		success:function(data){
-	// 			$('#show_ad').html(data);
-	// 		}
-	// 	})
-	// });
+	
+
+	$('#search').change(function(){
+		var search = $("#search").val();
+		console.log(search);
+		$.ajax({
+			url:"../search_data.php",
+			method:"POST",
+			data:{search:search},
+			success:function(data){
+				$('#show_ad').html(data);
+			}
+		})
+	});
 })
 </script>
 </html>

@@ -21,7 +21,7 @@ if(isset($buyer)){
 
   }
 
-
+//TODO link image picture with user profile
   $result = $conn->query($sql);
   if($seller !=''){
     while($row = $result->fetch_assoc()){
@@ -44,7 +44,7 @@ if(isset($buyer)){
             </div>
           </div>
           <div class='col-sm-2'>
-            <img style='width:100%;padding-bottom: 5%;' src='https://avatarfiles.alphacoders.com/495/49573.jpg'/>
+            <a href='#'><img style='width:100%;padding-bottom: 5%;' src='https://avatarfiles.alphacoders.com/495/49573.jpg'/></a>
           </div>
           <div class='col-sm-7'>
             <h6>{$row['username']} is requesting...</h6>
@@ -72,7 +72,7 @@ if(isset($buyer)){
             </div>
           </div>
           <div class='col-sm-2'>
-            <img style='width:100%;padding-bottom: 5%;' src='https://avatarfiles.alphacoders.com/495/49573.jpg'/>
+            <a href='#'><img style='width:100%;padding-bottom: 5%;' src='https://avatarfiles.alphacoders.com/495/49573.jpg'/></a>
           </div>
           <div class='col-sm-7'>
             <h6>{$row['username']} is requesting...</h6>

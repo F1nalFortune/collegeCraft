@@ -23,6 +23,7 @@ from trade_request
 INNER JOIN users on trade_request.buyer=users.user_id where seller = {$user_id} AND complete=0";
     $result = $conn->query($sql);
 
+// TODO link user image with profile
     while($row = $result->fetch_assoc()){
 			$view = $row['id'];
       if($row['cash']==0){
@@ -43,7 +44,7 @@ INNER JOIN users on trade_request.buyer=users.user_id where seller = {$user_id} 
 												</div>
                       </div>
 											<div class='col-sm-2'>
-												<img style='width:100%;padding-bottom: 5%;' src='https://avatarfiles.alphacoders.com/495/49573.jpg'/>
+												<a href='#'><img style='width:100%;padding-bottom: 5%;' src='https://avatarfiles.alphacoders.com/495/49573.jpg'/></a>
 											</div>
 											<div class='col-sm-7'>
 												<h6>{$row['username']} is requesting...</h6>
@@ -71,7 +72,7 @@ INNER JOIN users on trade_request.buyer=users.user_id where seller = {$user_id} 
 												</div>
                       </div>
 											<div class='col-sm-2'>
-												<img style='width:100%;padding-bottom: 5%;' src='https://avatarfiles.alphacoders.com/495/49573.jpg'/>
+												<a href='#'><img style='width:100%;padding-bottom: 5%;' src='https://avatarfiles.alphacoders.com/495/49573.jpg'/></a>
 											</div>
 											<div class='col-sm-7'>
 												<h6>{$row['username']} is requesting...</h6>
