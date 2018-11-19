@@ -28,11 +28,6 @@ if(isset($buyer)){
       if($row['cash']==0){
         $output .="
         <div class='row' style='border: 1px solid black'>
-          <div class='col-sm-7'>
-            <h6>{$row['username']} is requesting...</h6>
-          </div>
-          <div class='col-sm-5'>
-          </div>
           <div class='col-sm-3'>
             <p>Requesting item # {$row['request']}</p>
           </div>
@@ -48,15 +43,19 @@ if(isset($buyer)){
               <i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
             </div>
           </div>
+          <div class='col-sm-2'>
+            <img style='width:100%;padding-bottom: 5%;' src='https://avatarfiles.alphacoders.com/495/49573.jpg'/>
+          </div>
+          <div class='col-sm-7'>
+            <h6>{$row['username']} is requesting...</h6>
+            <p>{$row['comment']}</p>
+          </div>
+          <div class='col-sm-3'>
+          </div>
         </div>";
       } else {
         $output .="
         <div class='row' style='border: 1px solid black'>
-          <div class='col-sm-7'>
-            <h6>{$row['username']} is requesting...</h6>
-          </div>
-          <div class='col-sm-5'>
-          </div>
           <div class='col-sm-3'>
             <p>Requesting item # {$row['request']}</p>
           </div>
@@ -71,6 +70,15 @@ if(isset($buyer)){
               <i id='{$row['id']}' class='far fa-check-circle fa-2x'></i>
               <i id='{$row['id']}' class='far fa-times-circle fa-2x'></i>
             </div>
+          </div>
+          <div class='col-sm-2'>
+            <img style='width:100%;padding-bottom: 5%;' src='https://avatarfiles.alphacoders.com/495/49573.jpg'/>
+          </div>
+          <div class='col-sm-7'>
+            <h6>{$row['username']} is requesting...</h6>
+            <p>{$row['comment']}</p>
+          </div>
+          <div class='col-sm-3'>
           </div>
         </div>";
       }
