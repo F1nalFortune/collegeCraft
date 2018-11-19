@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2018 at 09:44 PM
+-- Generation Time: Nov 19, 2018 at 06:32 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -750,15 +750,15 @@ CREATE TABLE `trade_ad` (
 --
 
 INSERT INTO `trade_ad` (`id`, `product_id`, `price`, `qty`, `seller`) VALUES
-(2, 2, 77.44, 47, 2),
-(3, 3, 23.81, 9, 2),
+(2, 2, 77.44, 47, 102),
+(3, 3, 23.81, 9, 102),
 (4, 4, 65.25, 15, 2),
 (5, 5, 50.02, 17, 2),
 (6, 6, 37.99, 45, 6),
 (7, 7, 54.07, 10, 7),
 (8, 8, 82.99, 9, 8),
 (9, 9, 89.45, 11, 9),
-(10, 10, 19.73, 50, 10),
+(10, 10, 19.73, 50, 102),
 (11, 11, 44.73, 6, 11),
 (12, 12, 53.52, 37, 12),
 (13, 13, 18.05, 25, 13),
@@ -772,7 +772,7 @@ INSERT INTO `trade_ad` (`id`, `product_id`, `price`, `qty`, `seller`) VALUES
 (21, 21, 89.86, 20, 21),
 (22, 22, 90.97, 26, 22),
 (23, 23, 99.8, 6, 23),
-(24, 24, 42.63, 48, 24),
+(24, 24, 42.63, 48, 104),
 (25, 25, 4.73, 9, 25),
 (26, 26, 6.41, 16, 26),
 (27, 27, 81.58, 16, 27),
@@ -865,20 +865,20 @@ CREATE TABLE `trade_request` (
   `price` float DEFAULT NULL,
   `cash` tinyint(1) DEFAULT NULL,
   `trade` tinyint(1) DEFAULT NULL,
-  `COMMENT` varchar(255) DEFAULT NULL
+  `COMMENT` varchar(255) DEFAULT NULL,
+  `complete` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `trade_request`
 --
 
-INSERT INTO `trade_request` (`id`, `seller`, `buyer`, `request`, `offer`, `price`, `cash`, `trade`, `COMMENT`) VALUES
-(1, 4, 4, 4, 3, 1, 1, 0, 'asdf'),
-(2, 17, 102, 17, 2, 99, 0, 1, 'asdf'),
-(3, 17, 102, 17, 2, 99, 0, 1, 'asdfa'),
-(4, 17, 102, 17, 2, 99, 1, 0, ''),
-(5, 15, 102, 15, 2, 48, 0, 1, 'asdfasdf'),
-(6, 15, 102, 15, 2, 48, 0, 1, 'asdfasdf');
+INSERT INTO `trade_request` (`id`, `seller`, `buyer`, `request`, `offer`, `price`, `cash`, `trade`, `COMMENT`, `complete`) VALUES
+(1, 4, 4, 4, 3, 1, 1, 0, 'asdf', 1),
+(5, 102, 15, 15, 2, 48, 0, 1, 'asdfasdf', 0),
+(6, 102, 44, 15, 2, 48, 0, 1, 'asdfasdf', 0),
+(9, 94, 102, 94, 2, 74, 0, 1, 'asdfasdf', 0),
+(10, 94, 102, 94, 2, 74, 0, 1, 'asdfa', 0);
 
 -- --------------------------------------------------------
 
@@ -1002,9 +1002,8 @@ INSERT INTO `users` (`user_id`, `username`, `hashed_password`, `email_address`, 
 (98, 'reilly87', 'f0bfcbe24556e7d749c595f74c34aa3669fca58d', 'xsmith@example.com', 'Totam suscipit eos quaerat ut impedit dolores est. Odit sapiente quam laudantium velit. Necessitatibus quaerat sit rem in hic in reprehenderit. Sint ea sed et ut.', 0, 'Boston University', 'Art'),
 (99, 'rae28', '1291117e4dcc46be28dc3c6344a3e0de82cf6d17', 'felton54@example.net', 'Soluta fugiat debitis velit ullam qui. Beatae incidunt autem eligendi.', 0, ' Northeastern University', 'Obie'),
 (100, 'zvandervort', 'ba4f8465b61ccccd5d1c871b8bfe5335b95c1acd', 'nreichert@example.com', 'Delectus aut tenetur sunt maxime error beatae. Et ipsa et eveniet voluptatem sint dolores modi. Temporibus minima nobis nemo voluptas aut sed.', 0, ' Boston College', 'Rusty'),
-(101, 'admin', '$1$salt0123$O7peeN/6eCXL0x9F/yb.81', NULL, NULL, NULL, NULL, NULL),
 (102, 'admin', '$1$salt0123$O7peeN/6eCXL0x9F/yb.81', NULL, NULL, NULL, NULL, NULL),
-(103, 'admin', '$1$salt0123$O7peeN/6eCXL0x9F/yb.81', NULL, NULL, NULL, NULL, NULL);
+(104, 'newbie', '$1$salt0123$et3lF93ivaqsh6y4U2Sm.1', NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -1112,13 +1111,13 @@ ALTER TABLE `trade_ad`
 -- AUTO_INCREMENT for table `trade_request`
 --
 ALTER TABLE `trade_request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- Constraints for dumped tables
