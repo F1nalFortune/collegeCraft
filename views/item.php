@@ -44,6 +44,7 @@
     $email = $row['email_address'];
     $name = $row['name'];
     include './partials/header.php';
+    //TODO add condition to trade_id parameter
     echo "
     <div id='sub-nav'>
       <a href='javascript:history.go(-1)'><-Back to previous page</a> | Listed in category:

@@ -106,7 +106,7 @@
       </div>
       <div class='col-sm-1'>
       </div>
-      <div id='show_sort' class='row'>
+      <div id='show_sort' class='row' style='width:100%;'>
       <?php
       while($row = $result->fetch_assoc()){
           // GET BUYERS USERNAME
@@ -133,6 +133,11 @@
         </div>
         <div class='col-sm-1'>
         </div>
+        ";
+      }
+      if ( $result->num_rows < 2 ){
+        echo "
+          <script>document.getElementById('sort').disabled = true;</script>
         ";
       }
         ?>
@@ -171,6 +176,8 @@
         }
       })
     });
+
+
   </script>
 
 </html>

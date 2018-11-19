@@ -73,6 +73,11 @@ echo "<script>    $(function() {
       $('span.stars').stars();
     });
 </script>";
+if ( $result->num_rows < 2 ){
+  echo "
+    <script>document.getElementById('sort').disabled = true;</script>
+  ";
+}
 }
 
  ?>

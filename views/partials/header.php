@@ -10,8 +10,8 @@ if(isset($_SESSION['loggedin'])){
     $user_id = $a['user_id'];
   }
 
-//TODO fix requests so that only shows uncompleted
-  $requests = "SELECT count(*) from trade_request where seller = {$user_id}";
+
+  $requests = "SELECT count(*) from trade_request where seller = {$user_id} and completed=0";
   $requests_result = $conn->query($requests);
   while($b = $requests_result->fetch_assoc()){
     $count = $b['count(*)'];
