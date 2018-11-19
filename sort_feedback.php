@@ -36,7 +36,7 @@ if(isset($_POST['sort'])){
             INNER JOIN Trade_ad ON review.trade_id=Trade_ad.id
             INNER JOIN product ON trade_ad.product_id=product.product_id
             INNER JOIN users ON users.user_id=trade_ad.seller
-            WHERE seller = 6
+            WHERE seller = {$user}
             ORDER BY review ASC";
   } else {
     console.log('fail');
