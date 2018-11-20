@@ -19,3 +19,8 @@
 .list-group-item:hover{
   cursor: pointer;
 }
+
+.dropdown-menu{
+  left: '' !important;
+  right: 0 !important;
+}

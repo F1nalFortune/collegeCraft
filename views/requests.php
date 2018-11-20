@@ -99,8 +99,8 @@ INNER JOIN users on trade_request.buyer=users.user_id where seller = {$user_id} 
     <div class='row'>
       <div class='col-sm-3'>
           <ul class='list-group'>
-            <li class='list-group-item active'>Incoming Requests</li>
-            <li id='outgoing' class='list-group-item'>Outgoing Requests</li>
+            <li class='list-group-item active'>Inbox</li>
+            <li id='outgoing' class='list-group-item'>Outbox</li>
             <li class='list-group-item'>Completed</li>
           </ul>
       </div>
@@ -120,9 +120,9 @@ INNER JOIN users on trade_request.buyer=users.user_id where seller = {$user_id} 
       var buyer = '';
       var seller = '';
       var complete = '';
-    if ($('.list-group-item.active').text()==="Outgoing Requests"){
+    if ($('.list-group-item.active').text()==="Outbox"){
       var buyer = parseInt(<?php echo $user_id ?>);
-    } else if($('.list-group-item.active').text()==="Incoming Requests"){
+    } else if($('.list-group-item.active').text()==="Inbox"){
       var seller = parseInt(<?php echo $user_id ?>);
     } else {
       var complete = parseInt(<?php echo $user_id ?>);

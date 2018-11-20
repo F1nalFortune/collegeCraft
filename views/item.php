@@ -92,8 +92,8 @@
     <div id='trade-form' class='card'>
         <div class='row'>
           <div class='col-sm-4'>
-            <p>Pick an Item</p>
-              <select id='trade-offer'>";
+          <label for='trade-offer'>Select Item:</label>
+          <select class='form-control' id='trade-offer'>";
     //GET USER ID
     $user_query = "SELECT user_id from users where username = '{$_SESSION['username']}'";
     $user_result = $conn->query($user_query);
@@ -116,11 +116,11 @@
             </select>
           </div>
           <div class='col-sm-4'>
-            <p>Comment</p>
-            <textarea id='comment' placeholder='Leave Comment'></textarea>
+            <label for ='comment'>Comment:</label>
+            <textarea id='comment' class='form-control' placeholder='Leave Comment'></textarea>
           </div>
           <div class='col-sm-4'>
-            <button id='submittrade'>Trade Now!</button>
+            <button type='button' id='submittrade' class='btn btn-primary btn-md'>Trade Now!</button>
           </div>
         </div>
     </div>
@@ -128,6 +128,7 @@
     ";
   }
  ?>
+
 
 <html>
   <head>

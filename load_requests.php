@@ -84,6 +84,48 @@ if(isset($buyer)){
       }
     }
 
+    //ECHO CONFIRMATION
+    echo "
+    <script>
+      $('.fa-check-circle').click(function(){
+    		var y = confirm('Press OK to confirm.');
+    		if (y == true){
+    			var id= $(this).attr('id');
+    			var parent = $(this).parent();
+    			$.ajax({
+    				url:'../accept_request.php',
+    				method:'POST',
+    				data:{id:id},
+    				success:function(data){
+
+    					$(parent).html('Successfully Confirmed');
+    				}
+    			})
+    		} else {
+    			console.log('Customer did not accept Request');
+    		}
+      });";
+
+      // ECHO DELETE REQUEST
+      echo "
+    		$('.fa-times-circle').click(function(){
+    			var x = confirm('Press OK to delete.');
+    			if (x == true){
+    				var id= $(this).attr('id');
+    				var parent = $(this).parent();
+    				$.ajax({
+    					url:'../delete_request.php',
+    					method:'POST',
+    					data:{id:id},
+    					success:function(data){
+    						$(parent).html('Successfully Deleted');
+    					}
+    				})
+    			} else {
+    				console.log('Customer did not delete Request');
+    			}
+    		});
+      </script>";
   } else {
     while($row = $result->fetch_assoc()){
       if($row['cash']==0){
