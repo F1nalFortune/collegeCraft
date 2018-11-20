@@ -92,6 +92,9 @@
     <div id='trade-form' class='card'>
         <div class='row'>
           <div class='col-sm-4'>
+            Request From PICTURE
+          </div>
+          <div class='col-sm-4'>
           <label for='trade-offer'>Select Item:</label>
           <select class='form-control' id='trade-offer'>";
     //GET USER ID
@@ -114,8 +117,6 @@
     }
       echo "
             </select>
-          </div>
-          <div class='col-sm-4'>
             <label for ='comment'>Comment:</label>
             <textarea id='comment' class='form-control' placeholder='Leave Comment'></textarea>
           </div>
