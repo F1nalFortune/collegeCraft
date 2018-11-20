@@ -104,7 +104,10 @@
 		</div>
 		<div class='col-sm-9'>
 			<div class='row' id="show_ad">
-				<?php echo $output ?>
+				<?php
+					echo fill_ad($conn);
+					// echo $output;
+				?>
 			</div>
 			<nav>
 				<ul class='pagination justify-content-center' style='padding-top: 5%;'>
