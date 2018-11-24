@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html>
 <head>
   <?php include './partials/head.html' ?>
@@ -32,7 +33,8 @@
 		echo "</table>";
 	}else{
 		echo "Welcome to User:  $_GET[goToProductPage]'s Products";
-		$result = $conn->query('select * from users natural join sells, product where users.user_id=1 and sells.product_id=product.product_id');
+                $usernameI = $_GET['goToProductPage'];
+		$result = $conn->query("select * from users natural join sells, product where users.username=\"$usernameI\" and product.product_id=sells.product_id");
 		$rows = $result->num_rows;
 		$columns = 4;
 		if($rows===0){
