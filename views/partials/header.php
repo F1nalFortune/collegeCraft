@@ -33,6 +33,9 @@ if(isset($_SESSION['loggedin'])){
         <a class="nav-link" href="/collegeCraft/views/dashboard.php">Dashboard</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="/collegeCraft/views/profiles.php">Profiles</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="/collegeCraft/views/about.php">About</a>
       </li>
     </ul>
