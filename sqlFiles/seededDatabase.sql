@@ -11,10 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
-DROP DATABASE IF EXISTS collegeCraft;
-CREATE DATABASE IF NOT EXISTS collegeCraft;
-USE collegeCraft;
-DROP TABLE IF EXISTS users, roles, product, comments, sells, reputation, trade_ad, review, trade_request;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;

@@ -91,7 +91,7 @@
             <option value="recent">Recent</option>
             <option value="oldest">Oldest</option>
             <option value="best">Best Review</option>
-            <option value="worst">Worst Review</option>
+            <!-- <option value="worst">Worst Review</option> -->
           </select>
         </p>
       </div>
