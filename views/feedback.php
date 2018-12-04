@@ -15,20 +15,27 @@
   }
 
   // GRAB USER FEEDBACK INFO
-  $info = "SELECT review.id, review.review, review.trade_id, review.feedback, review.created, review.buyer, trade_ad.product_id, trade_ad.price, trade_ad.qty, trade_ad.seller, product.name, users.username
+  $info = "SELECT review.id, review.review, review.trade_id,
+    review.feedback, review.created, buys.user_id as buyer, advertises.product_id,
+    trade_ad.price, trade_ad.qty, sells.user_id as seller, product.name, users.username
   FROM review
   INNER JOIN Trade_ad ON review.trade_id=Trade_ad.id
   INNER JOIN product ON trade_ad.product_id=product.product_id
   INNER JOIN users ON users.user_id=trade_ad.seller
+  INNER JOIN buys on trade_ad.id=buys.product_id
+  INNER JOIN sells on trade_ad.id=sells.product_id
+  INNER JOIN advertises on trade_ad.id = advertises.trade_ad_id
   WHERE seller = {$user}";
   $result = $conn->query($info);
 
 
   // GRAB USER RATING
-  $user_rating = "SELECT average_review from(select avg(review) as average_review, users.username, trade_ad.id, trade_ad.seller
+  $user_rating = "SELECT average_review from(select avg(review) as average_review,
+    users.username, trade_ad.id, sells.user_id as seller
                   from review
                   INNER JOIN trade_ad ON review.trade_id=trade_ad.id
                   INNER JOIN users ON trade_ad.seller=users.user_id
+                  INNER JOIN sells ON trade_ad.id=sells.product_id
                   where seller={$user}) as average";
   $user_rating_result = $conn->query($user_rating);
   while($b = $user_rating_result->fetch_assoc()){
