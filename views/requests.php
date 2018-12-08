@@ -18,9 +18,15 @@
       $user_id = $a['user_id'];
     }
     $output = '';
-    $sql = "SELECT trade_request.id, trade_request.seller, trade_request.buyer, trade_request.request, trade_request.offer, trade_request.price, trade_request.cash, trade_request.trade, trade_request.comment, trade_request.complete, users.username
-from trade_request
-INNER JOIN users on trade_request.buyer=users.user_id where seller = {$user_id} AND complete=0";
+    $sql = "SELECT trade_request.id, trade_request.buyer,
+		trade_request.request, trade_request.offer,
+		trade_request.cash, trade_request.trade, trade_request.comment,
+		trade_request.complete, users.username, trade_ad.price as price
+		from trade_request
+		INNER JOIN users on trade_request.buyer=users.user_id
+		INNER JOIN trade_ad on trade_request.request = trade_ad.id
+		where trade_request.seller = {$user_id}
+		AND complete=0";
     $result = $conn->query($sql);
 
 // TODO link user image with profile
