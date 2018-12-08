@@ -18,13 +18,13 @@ if(isset($_POST['sort'])){
     //         ORDER BY created DESC";
             // UPDATED QUERY
             $sql = "SELECT review.id, review.review, review.trade_id, review.feedback,
-                      review.created, trade_ad.product_id, trade_ad.price, trade_ad.qty,
+                      review.created, trade_ad.id, trade_ad.price, trade_ad.qty,
                       product.name, users.username, sells.user_id as seller, buys.user_id as buyer
                     FROM review
                     INNER JOIN Trade_ad ON review.trade_id=Trade_ad.id
                     INNER JOIN sells on trade_ad.id=sells.product_id
                     INNER JOIN buys on trade_ad.id=buys.product_id
-                    INNER JOIN product ON trade_ad.product_id=product.product_id
+                    INNER JOIN product ON trade_ad.id=product.product_id
                     INNER JOIN users ON users.user_id=trade_ad.seller
                     WHERE seller = {$user}
                     ORDER BY created DESC";
@@ -40,13 +40,13 @@ if(isset($_POST['sort'])){
     //         ORDER BY created ASC";
             // UPDATED QUERY
             $sql = "SELECT review.id, review.review, review.trade_id, review.feedback,
-                      review.created, trade_ad.product_id, trade_ad.price, trade_ad.qty,
+                      review.created, trade_ad.id, trade_ad.price, trade_ad.qty,
                       product.name, users.username, sells.user_id as seller, buys.user_id as buyer
                     FROM review
                     INNER JOIN Trade_ad ON review.trade_id=Trade_ad.id
                     INNER JOIN sells on trade_ad.id=sells.product_id
                     INNER JOIN buys on trade_ad.id=buys.product_id
-                    INNER JOIN product ON trade_ad.product_id=product.product_id
+                    INNER JOIN product ON trade_ad.id=product.product_id
                     INNER JOIN users ON users.user_id=trade_ad.seller
                     WHERE seller = {$user}
                     ORDER BY created ASC";
@@ -62,13 +62,13 @@ if(isset($_POST['sort'])){
     //         ORDER BY review DESC";
             //UPDATED QUERY
             $sql = "SELECT review.id, review.review, review.trade_id, review.feedback,
-                      review.created, trade_ad.product_id, trade_ad.price, trade_ad.qty,
+                      review.created, trade_ad.id, trade_ad.price, trade_ad.qty,
                       product.name, users.username, sells.user_id as seller, buys.user_id as buyer
                     FROM review
                     INNER JOIN Trade_ad ON review.trade_id=Trade_ad.id
                     INNER JOIN sells on trade_ad.id=sells.product_id
                     INNER JOIN buys on trade_ad.id=buys.product_id
-                    INNER JOIN product ON trade_ad.product_id=product.product_id
+                    INNER JOIN product ON trade_ad.id=product.product_id
                     INNER JOIN users ON users.user_id=trade_ad.seller
                     WHERE seller = {$user}
                     ORDER BY review DESC";
