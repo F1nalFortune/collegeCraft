@@ -5,10 +5,11 @@
   if(isset($search)){
     $sql = " SELECT *
      FROM (
-       SELECT Users.location, Trade_ad.id as Trade_ID, Trade_ad.product_id, Trade_ad.price, Product.name, Product.category
+       SELECT Users.location, Trade_ad.id as Trade_ID, Trade_ad.id, Trade_ad.price, Product.name, Product.category
        FROM Users
-       INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller
-       INNER JOIN Product ON Trade_ad.product_id=Product.product_id
+       INNER JOIN sells on Users.user_id=sells.user_id
+       INNER JOIN Trade_ad ON sells.product_id=Trade_ad.id
+       INNER JOIN Product ON Trade_ad.id=Product.product_id
      ) as Full_Ad
      WHERE name LIKE '%{$search}%'";
 

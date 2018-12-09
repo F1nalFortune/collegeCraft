@@ -18,9 +18,15 @@
       $user_id = $a['user_id'];
     }
     $output = '';
-    $sql = "SELECT trade_request.id, trade_request.seller, trade_request.buyer, trade_request.request, trade_request.offer, trade_request.price, trade_request.cash, trade_request.trade, trade_request.comment, trade_request.complete, users.username
-from trade_request
-INNER JOIN users on trade_request.buyer=users.user_id where seller = {$user_id} AND complete=0";
+    $sql = "SELECT trade_request.id, trade_request.buyer,
+		trade_request.request, trade_request.offer,
+		trade_request.cash, trade_request.trade, trade_request.comment,
+		trade_request.complete, users.username, trade_ad.price as price
+		from trade_request
+		INNER JOIN users on trade_request.buyer=users.user_id
+		INNER JOIN trade_ad on trade_request.request = trade_ad.id
+		where trade_request.seller = {$user_id}
+		AND complete=0";
     $result = $conn->query($sql);
 
 // TODO link user image with profile
@@ -101,8 +107,10 @@ INNER JOIN users on trade_request.buyer=users.user_id where seller = {$user_id} 
           <ul class='list-group'>
             <li class='list-group-item active'>Inbox</li>
             <li id='outgoing' class='list-group-item'>Outbox</li>
-            <li class='list-group-item'>Completed</li>
-          </ul>
+						<li class='list-group-item'>Sold</li>
+						<li class='list-group-item'>Purchased</li>
+						<li class='list-group-item'>Traded</li>
+					</ul>
       </div>
       <div class='col-sm-9'>
         <div id="show_requests">
@@ -119,18 +127,26 @@ INNER JOIN users on trade_request.buyer=users.user_id where seller = {$user_id} 
     $(this).addClass('active').siblings().removeClass('active');
       var buyer = '';
       var seller = '';
-      var complete = '';
+      var sold = '';
+			var traded = '';
+			var purchased = '';
     if ($('.list-group-item.active').text()==="Outbox"){
       var buyer = parseInt(<?php echo $user_id ?>);
     } else if($('.list-group-item.active').text()==="Inbox"){
       var seller = parseInt(<?php echo $user_id ?>);
-    } else {
-      var complete = parseInt(<?php echo $user_id ?>);
-    }
+    } else if($('.list-group-item.active').text()==="Sold"){
+			var sold = parseInt(<?php echo $user_id ?>);
+		} else if($('.list-group-item.active').text()=="Traded"){
+      var traded = parseInt(<?php echo $user_id ?>);
+    } else if($('.list-group-item.active').text()=="Purchased"){
+			var purchased = parseInt(<?php echo $user_id ?>);
+		}else{
+			console.log("error requests");
+		}
     $.ajax({
       url:"../load_requests.php",
       method:"POST",
-      data:{buyer:buyer, seller:seller, complete:complete},
+      data:{buyer:buyer, seller:seller, sold:sold, purchased:purchased, traded:traded},
       success:function(data){
         $('#show_requests').html(data);
       }

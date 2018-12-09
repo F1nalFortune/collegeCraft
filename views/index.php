@@ -63,50 +63,31 @@ session_destroy();
 
   <head>
     <title> Welcome to the College Craft </title>
-    <?php include './partials/head.html' ?>
+      <?php include './partials/head.html'; ?>
   </head>
   <body>
-
-      <div class='auth_form'>
-        <div class='row' style='text-align: center; background: white;'>
-          <p id='login' class='col-sm-3 offset-sm-3'>Log in</p>
-          <p id='register' class='col-sm-3'>Sign Up</p>
-        </div>
-        <form id='auth_form' action="index.php" method="POST" style='text-align: center;'>
-          <?php
-            if($_GET){
-              if(isset($_GET['badpassword'])){
-                echo "<h6 color:red> BAD USER/PASS </h6>";
-              }
-            }
-          ?>
-        <br>
-        <div class='row'>
-          <span class='col-sm-12'>Username: <br/><input type="Text" name="username"/> </span>
-        </div>
-        <div class='row'>
-          <span class='col-sm-12'>Password: <br/><input type="password" name="password"/> </span>
-        </div>
-        <input type="Submit" value = "Submit"/>
-
-        </form>
+    <div class="parallax"></div>
+      <div class='col-sm-12'>
+        <h1 style='text-align: center;'>College Craft!</h1>
       </div>
-
-
+    <div class='row stats' style='text-align: center;'>
+      <div class='col-xs-12 col-sm-2 offset-sm-3'>
+        <h1>100+</h1>
+        <h3>schools</h3>
+      </div>
+      <div class='col-xs-12 col-sm-2'>
+        <h1>500+</h1>
+        <h3>users</h3>
+      </div>
+      <div class='col-xs-12 col-sm-2'>
+        <h1>1000+</h1>
+        <h3>items</h3>
+      </div>
+    </div>
 
   </body>
   <script>
-      //Switch login / registration form
-    $("#login").click(function() {
-      $("#auth_form").attr("action", "index.php");
-      document.getElementById('login').style.background=' #80808024';
-      document.getElementById('register').style.background='white';
-    });
-
-    $("#register").click(function() {
-      $("#auth_form").attr("action", "registration.php");
-      document.getElementById('login').style.background='white';
-      document.getElementById('register').style.background=' #80808024';
-    });
+    document.getElementById('navigation-main').style.marginBottom = '0px';
   </script>
+
 </html>

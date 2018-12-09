@@ -4,21 +4,65 @@ include 'connect.php';
 $output = '';
 $buyer = $_POST['buyer'];
 $seller = $_POST['seller'];
-$complete = $_POST['complete'];
+$sold = $_POST['sold'];
+$purchased = $_POST['purchased'];
+$traded  = $_POST['traded'];
 if(isset($buyer)){
   if($buyer != ''){
-    $sql = "SELECT trade_request.id, trade_request.seller, trade_request.buyer, trade_request.request, trade_request.offer, trade_request.price, trade_request.cash, trade_request.trade, trade_request.comment, trade_request.complete, users.username
+    $sql = "SELECT trade_request.id, trade_request.seller, trade_request.buyer,
+    trade_request.request, trade_request.offer, trade_ad.price as price,
+    trade_request.cash, trade_request.trade, trade_request.comment,
+    trade_request.complete, users.username
             from trade_request
             INNER JOIN users on trade_request.buyer=users.user_id
+            INNER JOIN trade_ad on trade_request.request = trade_ad.id
             WHERE buyer = {$buyer} and complete=0";
+//FIX SELLER STATEMENT
   } else if($seller != ''){
-    $sql = "SELECT trade_request.id, trade_request.seller, trade_request.buyer, trade_request.request, trade_request.offer, trade_request.price, trade_request.cash, trade_request.trade, trade_request.comment, trade_request.complete, users.username
-            from trade_request
-            INNER JOIN users on trade_request.buyer=users.user_id where seller = {$seller} AND complete=0";
-  } else if ($complete != ''){
-    $sql = "(SELECT * from trade_request where seller = {$complete} AND complete=1) union (SELECT * from trade_request where buyer = {$complete} AND complete=1)";
+    $sql = "SELECT trade_request.id, trade_request.buyer,
+		trade_request.request, trade_request.offer,
+		trade_request.cash, trade_request.trade, trade_request.comment,
+		trade_request.complete, users.username, trade_ad.price as price
+		from trade_request
+		INNER JOIN users on trade_request.buyer=users.user_id
+		INNER JOIN trade_ad on trade_request.request = trade_ad.id
+		where trade_request.seller = {$seller}
+		AND complete=0";
+  } else if($sold != ''){
+    $sql = "SELECT trade_request.id, trade_request.buyer,
+    trade_request.request, trade_request.offer,
+    trade_request.cash, trade_request.trade, trade_request.comment,
+    trade_request.complete, users.username, trade_ad.price as price
+    from trade_request
+    INNER JOIN users on trade_request.buyer=users.user_id
+    INNER JOIN trade_ad on trade_request.request = trade_ad.id
+    where trade_request.seller = {$sold}
+    AND complete=1
+    AND cash=1";
+  } else if($purchased){
+    $sql = "SELECT trade_request.id, trade_request.buyer,
+    trade_request.request, trade_request.offer,
+    trade_request.cash, trade_request.trade, trade_request.comment,
+    trade_request.complete, users.username, trade_ad.price as price
+    from trade_request
+    INNER JOIN users on trade_request.buyer=users.user_id
+    INNER JOIN trade_ad on trade_request.request = trade_ad.id
+    where trade_request.buyer = {$purchased}
+    AND complete=1
+    AND cash=1";
+  } else if($traded){
+    $sql = "SELECT trade_request.id, trade_request.buyer,
+    trade_request.request, trade_request.offer,
+    trade_request.cash, trade_request.trade, trade_request.comment,
+    trade_request.complete, users.username, trade_ad.price as price
+    from trade_request
+    INNER JOIN users on trade_request.buyer=users.user_id
+    INNER JOIN trade_ad on trade_request.request = trade_ad.id
+    where {$traded} IN (trade_request.buyer, trade_request.seller)
+    AND complete=1
+    AND trade=1";
   } else {
-
+    console.log('error in requests');
   }
 
 //TODO link image picture with user profile

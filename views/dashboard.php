@@ -2,16 +2,18 @@
 <?php
 	session_start();
 
+	if(!isset($_SESSION['loggedin'])){
+		header("Location: index.php");
+	}
+
 	include '../connect.php';
 	$output = '';
 	function fill_university($conn){
 		$tableJoin = "SELECT DISTINCT location FROM (
-			SELECT Users.location, Trade_ad.id as Trade_ID, Trade_ad.product_id, Trade_ad.price, Product.name
-									FROM Users
-									INNER JOIN Trade_ad
-									ON Users.user_id=Trade_ad.seller
-									INNER JOIN Product
-									ON Trade_ad.product_id=Product.product_id) as Full_Table";
+			SELECT Users.location, Users.user_id, Product.product_id
+			FROM Users
+    	INNER JOIN sells on users.user_id= sells.user_id
+			INNER JOIN Product ON sells.product_id=Product.product_id) as Full_Table";
 		$joinResult = $conn->query($tableJoin);
 
 			while($row = $joinResult->fetch_assoc()){
@@ -22,7 +24,13 @@
 
 	function fill_ad($conn){
 		$output = '';
-		$sql = "SELECT * FROM ( SELECT Users.location, Trade_ad.id as Trade_ID, Trade_ad.product_id, Trade_ad.price, Product.name FROM Users INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller INNER JOIN Product ON Trade_ad.product_id=Product.product_id ) as Full_Ad";
+		$sql = "SELECT * FROM (
+    SELECT Users.location, Trade_ad.id as Trade_ID,
+			Trade_ad.price, Product.name
+		FROM Users
+    INNER JOIN sells on users.user_id=sells.user_id
+		INNER JOIN Trade_ad ON sells.product_id=trade_ad.id
+		INNER JOIN Product ON Trade_ad.id=Product.product_id ) as Full_Ad";
 		$result = $conn->query($sql);
 
 		while($row = $result->fetch_assoc()){
@@ -45,18 +53,23 @@
 
 	include '../connect.php';
 
-	$total_pages_sql = "SELECT COUNT(*) FROM trade_ad";
-	$result = mysqli_query($conn,$total_pages_sql);
-	$total_rows = mysqli_fetch_array($result)[0];
-	$total_pages = ceil($total_rows / $no_of_records_per_page);
-
-	$sql = "SELECT * FROM ( SELECT Users.location, Trade_ad.id as Trade_ID, Trade_ad.product_id, Trade_ad.price, Product.name FROM Users INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller INNER JOIN Product ON Trade_ad.product_id=Product.product_id ) as Full_Ad LIMIT $offset, $no_of_records_per_page";
-	$res_data = mysqli_query($conn,$sql);
-	while($row = mysqli_fetch_array($res_data)){
-			$output .= "<div class='col-sm-4' style='border: 1px solid black'>
-	                  <div><a href='item.php?item={$row['Trade_ID']}'>{$row['name']}</a></div>
-	              </div>";
-	}
+	// $total_pages_sql = "SELECT COUNT(*) FROM trade_ad";
+	// $result = mysqli_query($conn,$total_pages_sql);
+	// $total_rows = mysqli_fetch_array($result)[0];
+	// $total_pages = ceil($total_rows / $no_of_records_per_page);
+	//
+	// $sql = "SELECT * FROM ( SELECT Users.location, Trade_ad.id as Trade_ID,
+	// 	Trade_ad.price, Product.name
+	// 	FROM Users
+	// 	INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller
+	// 	INNER JOIN Product ON Trade_ad.id=Product.product_id ) as Full_Ad
+	// 	LIMIT $offset, $no_of_records_per_page";
+	// $res_data = mysqli_query($conn,$sql);
+	// while($row = mysqli_fetch_array($res_data)){
+	// 		$output .= "<div class='col-sm-4' style='border: 1px solid black'>
+	//                   <div><a href='item.php?item={$row['Trade_ID']}'>{$row['name']}</a></div>
+	//               </div>";
+	// }
 
 
 
@@ -78,17 +91,16 @@
 </head>
 <body>
   <?php include './partials/header.php' ?>
-  <h1>Dashboard</h1>
-	<h4><?php echo "Welcome ". $_SESSION["username"]. "!";?></h4>
+	<h4 style='text-align:center;'><?php echo "Welcome ". $_SESSION["username"]. "!";?></h4>
 <div class='container'>
 	<div class='row'>
-		<div class='col-sm-12' style='text-align: center'>
+		<div class='col-sm-12' style='text-align: center;padding-bottom: 3%;'>
 			<p> Search for Item</p>
 			<input id='search' type='text' placeholder='search'/>
 			<input type='submit' value='submit'>
 		</div>
 
-		<div class='col-sm-3'>
+		<div class='col-sm-4'>
 			<label for='university'> University </label>
 			<select name='university' id='university'>
 				<option value="">Show All University</option>
@@ -102,7 +114,7 @@
 			  <li class='list-group-item active'>ALL</li>
 			</ul>
 		</div>
-		<div class='col-sm-9'>
+		<div class='col-sm-8'>
 			<div class='row' id="show_ad">
 				<?php
 					echo fill_ad($conn);
@@ -154,6 +166,7 @@
 <script>
 $(document).ready(function(){
 	$('#university').change(function(){
+		document.getElementById('search').value = '';
 		var location = $(this).val();
 		var category = $('.list-group-item.active').text();
 		$.ajax({
@@ -166,6 +179,7 @@ $(document).ready(function(){
 		})
 	});
 	$('.list-group-item').click(function(){
+		document.getElementById('search').value = '';
 		$(this).addClass('active').siblings().removeClass('active');
 		var location = $("#university").val();
 		var category = $(this).text();

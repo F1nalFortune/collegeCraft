@@ -17,26 +17,30 @@
   }
 
   // GRAB USER RATING
-  $user_rating = "SELECT average_review from(select avg(review) as average_review, users.username, trade_ad.id, trade_ad.seller
+  $user_rating = "SELECT average_review from(select avg(review) as average_review,
+  users.username, trade_ad.id, sells.user_id as seller
                   from review
                   INNER JOIN trade_ad ON review.trade_id=trade_ad.id
-                  INNER JOIN users ON trade_ad.seller=users.user_id
+                  INNER JOIN sells on trade_ad.id=sells.product_id
+                  INNER JOIN users ON sells.user_id=users.user_id
                   where seller={$seller_id}) as average";
   $user_rating_result = $conn->query($user_rating);
   while($data = $user_rating_result->fetch_assoc()){
     $review = $data['average_review'];
   }
-  $sql = "SELECT Users.location, Users.username, Users.email_address, Users.user_id, Users.name as FirstName, Trade_ad.id as Trade_ID, Trade_ad.product_id, Trade_ad.price, Product.name, Product.category
+  $sql = "SELECT Users.location, Users.username, Users.email_address,
+  Users.user_id, Users.name as FirstName, Trade_ad.id as Trade_ID,
+  Trade_ad.id, Trade_ad.price, Product.name, Product.category
     FROM Users
-    INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller
-    INNER JOIN Product ON Trade_ad.product_id=Product.product_id
+    INNER JOIN sells on Users.user_id=sells.user_id
+    INNER JOIN Trade_ad ON sells.product_id=trade_ad.id
+    INNER JOIN Product ON Trade_ad.id=Product.product_id
     WHERE Trade_ad.id = {$item}";
   $result = $conn->query($sql);
 
   while($row = $result->fetch_assoc()){
     $location = $row['location'];
     $trade_id = $row['Trade_ID'];
-    $product_id = $row['product_id'];
     $price = $row['price'];
     $first = $row['FirstName'];
     $category = $row['category'];
@@ -71,11 +75,36 @@
               var n = num.toFixed(2);
               document.getElementById('price').value = n;
             </script>
-          </div>
+          </div>";
+
+
+
+
+
+
+      $newSql = "SELECT * from trade_request
+      where trade_request.request = {$item}
+      and trade_request.buyer = {$user_id}";
+      $resultzor = $conn->query($newSql);
+      if($resultzor->num_rows > 0){
+        echo "
+        <div class='row'>
+          <button id='purchase' disabled>Purchase</button>
+          <button id='trade' disabled>Trade</button>
+        </div>
+        <div class='row' style='font-style: italic;'>
+          Awaiting response from {$row['username']}
+        </div>
+        ";
+      } else {
+        echo "
           <div class='row'>
-          <button id='purchase'>Purchase</button>
-          <button id='trade'>Trade</button>
-          </div>
+            <button id='purchase'>Purchase</button>
+            <button id='trade'>Trade</button>
+          </div>";
+      }
+
+      echo "
 
         </div>
       </div>
@@ -105,10 +134,12 @@
     }
 
     //GET USER ITEMS
-    $user_items = "SELECT Users.location, Trade_ad.id as Trade_ID, Trade_ad.product_id, Trade_ad.price, Product.name, Product.category
+    $user_items = "SELECT Users.location, Trade_ad.id as Trade_ID,
+    Trade_ad.price, Product.name, Product.category
       FROM Users
-      INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller
-      INNER JOIN Product ON Trade_ad.product_id=Product.product_id
+      INNER JOIN sells on users.user_id=sells.user_id
+      INNER JOIN Trade_ad ON sells.product_id=Trade_ad.id
+      INNER JOIN Product ON Trade_ad.id=Product.product_id
       WHERE users.user_id = {$user_id}";
     $user_items_result = $conn->query($user_items);
     while($row = $user_items_result->fetch_assoc()){
