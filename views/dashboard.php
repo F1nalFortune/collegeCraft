@@ -10,12 +10,10 @@
 	$output = '';
 	function fill_university($conn){
 		$tableJoin = "SELECT DISTINCT location FROM (
-			SELECT Users.location, Trade_ad.id as Trade_ID, Trade_ad.product_id, Trade_ad.price, Product.name
+			SELECT Users.location, Trade_ad.id as Trade_ID, Trade_ad.price, Product.name
 									FROM Users
-									INNER JOIN Trade_ad
-									ON Users.user_id=Trade_ad.seller
-									INNER JOIN Product
-									ON Trade_ad.product_id=Product.product_id) as Full_Table";
+									INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller
+									INNER JOIN Product ON Trade_ad.id=Product.product_id) as Full_Table";
 		$joinResult = $conn->query($tableJoin);
 
 			while($row = $joinResult->fetch_assoc()){
@@ -26,7 +24,11 @@
 
 	function fill_ad($conn){
 		$output = '';
-		$sql = "SELECT * FROM ( SELECT Users.location, Trade_ad.id as Trade_ID, Trade_ad.product_id, Trade_ad.price, Product.name FROM Users INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller INNER JOIN Product ON Trade_ad.product_id=Product.product_id ) as Full_Ad";
+		$sql = "SELECT * FROM ( SELECT Users.location, Trade_ad.id as Trade_ID,
+			Trade_ad.price, Product.name
+			FROM Users
+			INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller
+			INNER JOIN Product ON Trade_ad.id=Product.product_id ) as Full_Ad";
 		$result = $conn->query($sql);
 
 		while($row = $result->fetch_assoc()){
@@ -54,7 +56,12 @@
 	$total_rows = mysqli_fetch_array($result)[0];
 	$total_pages = ceil($total_rows / $no_of_records_per_page);
 
-	$sql = "SELECT * FROM ( SELECT Users.location, Trade_ad.id as Trade_ID, Trade_ad.product_id, Trade_ad.price, Product.name FROM Users INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller INNER JOIN Product ON Trade_ad.product_id=Product.product_id ) as Full_Ad LIMIT $offset, $no_of_records_per_page";
+	$sql = "SELECT * FROM ( SELECT Users.location, Trade_ad.id as Trade_ID,
+		Trade_ad.price, Product.name
+		FROM Users
+		INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller
+		INNER JOIN Product ON Trade_ad.id=Product.product_id ) as Full_Ad
+		LIMIT $offset, $no_of_records_per_page";
 	$res_data = mysqli_query($conn,$sql);
 	while($row = mysqli_fetch_array($res_data)){
 			$output .= "<div class='col-sm-4' style='border: 1px solid black'>
@@ -158,6 +165,7 @@
 <script>
 $(document).ready(function(){
 	$('#university').change(function(){
+		document.getElementById('search').value = '';
 		var location = $(this).val();
 		var category = $('.list-group-item.active').text();
 		$.ajax({
@@ -170,6 +178,7 @@ $(document).ready(function(){
 		})
 	});
 	$('.list-group-item').click(function(){
+		document.getElementById('search').value = '';
 		$(this).addClass('active').siblings().removeClass('active');
 		var location = $("#university").val();
 		var category = $(this).text();

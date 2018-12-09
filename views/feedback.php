@@ -20,7 +20,7 @@
     trade_ad.price, trade_ad.qty, sells.user_id as seller, product.name, users.username
   FROM review
   INNER JOIN Trade_ad ON review.trade_id=Trade_ad.id
-  INNER JOIN product ON trade_ad.product_id=product.product_id
+  INNER JOIN product ON trade_ad.id=product.product_id
   INNER JOIN users ON users.user_id=trade_ad.seller
   INNER JOIN buys on trade_ad.id=buys.product_id
   INNER JOIN sells on trade_ad.id=sells.product_id

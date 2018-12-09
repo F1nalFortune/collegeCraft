@@ -26,10 +26,12 @@
   while($data = $user_rating_result->fetch_assoc()){
     $review = $data['average_review'];
   }
-  $sql = "SELECT Users.location, Users.username, Users.email_address, Users.user_id, Users.name as FirstName, Trade_ad.id as Trade_ID, Trade_ad.product_id, Trade_ad.price, Product.name, Product.category
+  $sql = "SELECT Users.location, Users.username, Users.email_address,
+  Users.user_id, Users.name as FirstName, Trade_ad.id as Trade_ID,
+  Trade_ad.id, Trade_ad.price, Product.name, Product.category
     FROM Users
     INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller
-    INNER JOIN Product ON Trade_ad.product_id=Product.product_id
+    INNER JOIN Product ON Trade_ad.id=Product.product_id
     WHERE Trade_ad.id = {$item}";
   $result = $conn->query($sql);
 
@@ -130,10 +132,11 @@
     }
 
     //GET USER ITEMS
-    $user_items = "SELECT Users.location, Trade_ad.id as Trade_ID, Trade_ad.product_id, Trade_ad.price, Product.name, Product.category
+    $user_items = "SELECT Users.location, Trade_ad.id as Trade_ID,
+    Trade_ad.price, Product.name, Product.category
       FROM Users
       INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller
-      INNER JOIN Product ON Trade_ad.product_id=Product.product_id
+      INNER JOIN Product ON Trade_ad.id=Product.product_id
       WHERE users.user_id = {$user_id}";
     $user_items_result = $conn->query($user_items);
     while($row = $user_items_result->fetch_assoc()){
