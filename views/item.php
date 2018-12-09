@@ -71,11 +71,36 @@
               var n = num.toFixed(2);
               document.getElementById('price').value = n;
             </script>
-          </div>
+          </div>";
+
+
+
+
+
+
+      $newSql = "SELECT * from trade_request
+      where trade_request.request = {$item}
+      and trade_request.buyer = {$user_id}";
+      $resultzor = $conn->query($newSql);
+      if($resultzor->num_rows > 0){
+        echo "
+        <div class='row'>
+          <button id='purchase' disabled>Purchase</button>
+          <button id='trade' disabled>Trade</button>
+        </div>
+        <div class='row' style='font-style: italic;'>
+          Awaiting response from {$row['username']}
+        </div>
+        ";
+      } else {
+        echo "
           <div class='row'>
-          <button id='purchase'>Purchase</button>
-          <button id='trade'>Trade</button>
-          </div>
+            <button id='purchase'>Purchase</button>
+            <button id='trade'>Trade</button>
+          </div>";
+      }
+
+      echo "
 
         </div>
       </div>

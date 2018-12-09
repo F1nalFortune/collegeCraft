@@ -147,6 +147,12 @@
           <script>document.getElementById('sort').disabled = true;</script>
         ";
       }
+      if ( $result->num_rows == 0 ){
+        echo "
+        <div class='col-sm-12' style='text-align: center'>
+          No Reviews.
+        </div>";
+      }
         ?>
       </div>
     </div>
