@@ -14,7 +14,8 @@ if(isset($location)){
       SELECT Users.location, Trade_ad.id as Trade_ID,
       Trade_ad.price, Product.name, Product.category
       FROM Users
-      INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller
+      INNER JOIN sells on Users.user_id=sells.user_id
+      INNER JOIN Trade_ad ON sells.user_id=Trade_ad.id
       INNER JOIN Product ON Trade_ad.id=Product.product_id
     ) as Full_Ad
     WHERE location = '{$location}'
@@ -25,7 +26,8 @@ if(isset($location)){
       SELECT Users.location, Trade_ad.id as Trade_ID,
       Trade_ad.price, Product.name, Product.category
       FROM Users
-      INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller
+      INNER JOIN sells on Users.user_id=sells.user_id
+      INNER JOIN Trade_ad ON sells.user_id=Trade_ad.id
       INNER JOIN Product ON Trade_ad.id=Product.product_id
     ) as Full_Ad
     WHERE location = '{$location}'";
@@ -35,7 +37,8 @@ if(isset($location)){
       SELECT Users.location, Trade_ad.id as Trade_ID,
       Trade_ad.price, Product.name, Product.category
       FROM Users
-      INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller
+      INNER JOIN sells on Users.user_id=sells.user_id
+      INNER JOIN Trade_ad ON sells.user_id=Trade_ad.id
       INNER JOIN Product ON Trade_ad.id=Product.product_id
     ) as Full_Ad
     WHERE category = '{$category}'";
@@ -43,7 +46,8 @@ if(isset($location)){
     $sql = "SELECT Users.location, Trade_ad.id as Trade_ID,
     Trade_ad.price, Product.name, Product.category
       FROM Users
-      INNER JOIN Trade_ad ON Users.user_id=Trade_ad.seller
+      INNER JOIN sells on Users.user_id=sells.user_id
+      INNER JOIN Trade_ad ON sells.user_id=Trade_ad.id
       INNER JOIN Product ON Trade_ad.id=Product.product_id";
   }
 

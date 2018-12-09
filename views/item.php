@@ -38,7 +38,6 @@
   while($row = $result->fetch_assoc()){
     $location = $row['location'];
     $trade_id = $row['Trade_ID'];
-    $product_id = $row['product_id'];
     $price = $row['price'];
     $first = $row['FirstName'];
     $category = $row['category'];
