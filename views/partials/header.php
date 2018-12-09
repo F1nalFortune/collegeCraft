@@ -22,7 +22,9 @@ if(isset($_SESSION['loggedin'])){
 ?>
 
 <nav id='navigation-main' class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/collegeCraft/views/index.php">collegeCraft</a>
+  <a class="navbar-brand" href="/collegeCraft/views/index.php">
+    <h4>collegeCraft</h4>
+  </a>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">

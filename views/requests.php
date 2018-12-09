@@ -107,8 +107,10 @@
           <ul class='list-group'>
             <li class='list-group-item active'>Inbox</li>
             <li id='outgoing' class='list-group-item'>Outbox</li>
-            <li class='list-group-item'>Completed</li>
-          </ul>
+						<li class='list-group-item'>Sold</li>
+						<li class='list-group-item'>Purchased</li>
+						<li class='list-group-item'>Traded</li>
+					</ul>
       </div>
       <div class='col-sm-9'>
         <div id="show_requests">
@@ -125,18 +127,26 @@
     $(this).addClass('active').siblings().removeClass('active');
       var buyer = '';
       var seller = '';
-      var complete = '';
+      var sold = '';
+			var traded = '';
+			var purchased = '';
     if ($('.list-group-item.active').text()==="Outbox"){
       var buyer = parseInt(<?php echo $user_id ?>);
     } else if($('.list-group-item.active').text()==="Inbox"){
       var seller = parseInt(<?php echo $user_id ?>);
-    } else {
-      var complete = parseInt(<?php echo $user_id ?>);
-    }
+    } else if($('.list-group-item.active').text()==="Sold"){
+			var sold = parseInt(<?php echo $user_id ?>);
+		} else if($('.list-group-item.active').text()=="Traded"){
+      var traded = parseInt(<?php echo $user_id ?>);
+    } else if($('.list-group-item.active').text()=="Purchased"){
+			var purchased = parseInt(<?php echo $user_id ?>);
+		}else{
+			console.log("error requests");
+		}
     $.ajax({
       url:"../load_requests.php",
       method:"POST",
-      data:{buyer:buyer, seller:seller, complete:complete},
+      data:{buyer:buyer, seller:seller, sold:sold, purchased:purchased, traded:traded},
       success:function(data){
         $('#show_requests').html(data);
       }
