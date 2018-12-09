@@ -10,7 +10,6 @@ if(isset($_SESSION['loggedin'])){
     $user_id = $a['user_id'];
   }
 
-//TODO fix requests so that only shows uncompleted
   $requests = "SELECT count(*) from trade_request where seller = {$user_id} and complete=0";
   $requests_result = $conn->query($requests);
   while($b = $requests_result->fetch_assoc()){
@@ -22,7 +21,7 @@ if(isset($_SESSION['loggedin'])){
 
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav id='navigation-main' class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="/collegeCraft/views/index.php">collegeCraft</a>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
@@ -41,7 +40,7 @@ if(isset($_SESSION['loggedin'])){
     </ul>
   </div>
   <?php
-    if(session_status() == PHP_SESSION_ACTIVE){
+    if(isset($_SESSION['loggedin'])){
       echo"
       <ul style='float:right; list-style:none;' class='dots row'>
           <li class='nav-item dropdown'>
@@ -50,7 +49,7 @@ if(isset($_SESSION['loggedin'])){
                     {$count}
               </span>
             </a>
-            <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+            <div class='dropdown-menu' aria-labelledby='navbarDropdown' style='left: auto;right: 0 !important;padding-top: 0;'>
               <a class='dropdown-item' href='/collegeCraft/views/requests.php'>Incoming Requests</a>
               <a class='dropdown-item' href='/collegeCraft/views/requests.php?outgoing=true'>Outgoing Requests</a>
             </div>
@@ -65,7 +64,9 @@ if(isset($_SESSION['loggedin'])){
         <li class='dropdown'>
           <a class='dropdown-toggle nav-link' data-toggle='dropdown' href='#'>Login</a>
 
-          <form id='auth_form' action='index.php' method='POST' class='dropdown-menu form-login stop-propagation' role='menu' style='left:auto;right: 0 !important;padding-left:50%;padding-right:50%;padding-top: 0;'>";
+          <form id='auth_form' action='index.php' method='POST' class='dropdown-menu form-login stop-propagation' role='menu' style='left:auto;right: 0 !important;padding-left:50%;padding-right:50%;padding-top: 0;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);'>
+            <h2 id='formtitle'>Login</h2>
+          ";
 
               if($_GET){
                 if(isset($_GET['badpassword'])){
@@ -81,10 +82,27 @@ if(isset($_SESSION['loggedin'])){
             <label for='pw'>Password:</label><br/><input id='pw' class='form-control' type='password' name='password' style='width: 200px;'/>
           </div>
           <input type='Submit' class='btn btn-primary btn-md' value = 'Submit' style='width: 100%;margin-top: 5%;'/>
-
+          <div style='text-align: center;padding-top: 10%;'>
+            <a href='#' id='form-link-toggle'>Register here.</a>
+          </div>
           </form>
           </li>
-      </ul>";
+      </ul>
+      <script>
+        var formlink = document.getElementById('form-link-toggle');
+        var formtitle = document.getElementById('formtitle');
+        formlink.onclick = function(){
+          if(formlink.innerHTML == 'Login here.'){
+            document.getElementById('auth_form').setAttribute('action', 'index.php');
+            formlink.innerHTML = 'Register here.';
+            formtitle.innerHTML = 'Login';
+          } else {
+            document.getElementById('auth_form').setAttribute('action', 'registration.php');
+            formlink.innerHTML = 'Login here.';
+            formtitle.innerHTML = 'Register';
+          }
+        }
+      </script>";
         }
         ?>
 </nav>

@@ -13,5 +13,8 @@
 
 Eliptical talk. Every chance I get, I water the plants, Lion! They don’t want us to eat. Wraith talk. The first of the month is coming, we have to get money, we have no choice. It cost money to eat and they don’t want you to eat. Put it this way, it took me twenty five years to get these plants, twenty five years of blood sweat and tears, and I’m never giving up, I’m just getting started.
   </p>
+  <?php include './partials/campus_carousel.html'; ?>
+
+
 </body>
 </html>

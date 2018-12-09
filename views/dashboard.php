@@ -2,6 +2,10 @@
 <?php
 	session_start();
 
+	if(!isset($_SESSION['loggedin'])){
+		header("Location: index.php");
+	}
+
 	include '../connect.php';
 	$output = '';
 	function fill_university($conn){
@@ -82,13 +86,13 @@
 	<h4><?php echo "Welcome ". $_SESSION["username"]. "!";?></h4>
 <div class='container'>
 	<div class='row'>
-		<div class='col-sm-12' style='text-align: center'>
+		<div class='col-sm-12' style='text-align: center;padding-bottom: 3%;'>
 			<p> Search for Item</p>
 			<input id='search' type='text' placeholder='search'/>
 			<input type='submit' value='submit'>
 		</div>
 
-		<div class='col-sm-3'>
+		<div class='col-sm-4'>
 			<label for='university'> University </label>
 			<select name='university' id='university'>
 				<option value="">Show All University</option>
@@ -102,7 +106,7 @@
 			  <li class='list-group-item active'>ALL</li>
 			</ul>
 		</div>
-		<div class='col-sm-9'>
+		<div class='col-sm-8'>
 			<div class='row' id="show_ad">
 				<?php
 					echo fill_ad($conn);

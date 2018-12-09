@@ -5,9 +5,12 @@
 </head>
 <body>
   <?php include './partials/header.php' ?>
-  <?php 
+  <?php
 	$conn = @new mysqli('127.0.0.1', 'root', '');
 	$conn->query('use collegeCraft');
+  if(!isset($_SESSION['loggedin'])){
+    header("Location: index.php");
+  }
 	if(!isset($_GET['goToProductPage'])){
 		$result = $conn->query('select * from users');
 		$rows = $result->num_rows;
@@ -16,7 +19,7 @@
 		echo "<tr>";
 		for($i=0;$i<$rows;$i++){
 			$row = $result->fetch_assoc();
-			echo 
+			echo
 			"<td>
 				<table>
 					<tr><td><center>$row[username]</center></td></tr>
@@ -44,7 +47,7 @@
 		echo "<tr>";
 		for($i=0;$i<$rows;$i++){
 			$row = $result->fetch_assoc();
-			echo 
+			echo
 			"<td>
 				<table>
 					<tr><td><center>$row[name]</center></td></tr>
