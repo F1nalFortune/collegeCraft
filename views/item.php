@@ -36,7 +36,7 @@
   }
   $sql = "SELECT Users.location, Users.username, Users.email_address,
   Users.user_id, Users.name as FirstName, Trade_ad.id as Trade_ID,
-  Trade_ad.id, Trade_ad.price, Product.name, Product.category
+  Trade_ad.id, Trade_ad.price, Trade_ad.img, Product.name, Product.category
     FROM Users
     INNER JOIN sells on Users.user_id=sells.user_id
     INNER JOIN Trade_ad ON sells.product_id=trade_ad.id
@@ -53,6 +53,7 @@
     $username = $row['username'];
     $email = $row['email_address'];
     $name = $row['name'];
+    $image = $row['img'];
     include './partials/header.php';
     //TODO add condition to trade_id parameter
     echo "
@@ -64,7 +65,13 @@
   <div class='container'>
     <div class='row'>
       <div class='col-sm-3 card'>
-        <img id='trade-pic' src='http://www.cupcakeboxes.co.nz/media/catalog/product/cache/8/image/9df78eab33525d08d6e5fb8d27136e95/s/a/sample_1.jpg' />
+        <img id='trade-pic' src='";
+        if($image==null){
+          echo "http://www.cupcakeboxes.co.nz/media/catalog/product/cache/8/image/9df78eab33525d08d6e5fb8d27136e95/s/a/sample_1.jpg'";
+        } else {
+          echo "{$image}'";
+        }
+echo " />
       </div>
       <div class='col-sm-6'>
         <div>
@@ -136,7 +143,7 @@
         </div>
 
         <a href='#'>Contact</a><br/>
-        <a href='#'>See other items</a>
+        <a href='/collegeCraft/views/profiles.php?goToProductPage={$row['username']}'>See other items</a>
       </div>
     </div>
     <div id='trade-form' class='card'>
