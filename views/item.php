@@ -1,3 +1,9 @@
+<html>
+  <head>
+    <?php include './partials/head.html' ?>
+
+  </head>
+  <body>
 <?php
   session_start();
 
@@ -8,12 +14,12 @@
   $item = $_GET['item'];
 
   //GET USER
-  $seller = "SELECT seller
-          FROM Trade_ad
-          WHERE trade_ad.id = {$item}";
+  $seller = "SELECT user_id
+            FROM sells
+            WHERE product_id= {$item}";
   $seller_result = $conn->query($seller);
   while($data = $seller_result->fetch_assoc()){
-    $seller_id = $data['seller'];
+    $seller_id = $data['user_id'];
   }
 
   // GRAB USER RATING
@@ -23,14 +29,14 @@
                   INNER JOIN trade_ad ON review.trade_id=trade_ad.id
                   INNER JOIN sells on trade_ad.id=sells.product_id
                   INNER JOIN users ON sells.user_id=users.user_id
-                  where seller={$seller_id}) as average";
+                  where sells.user_id={$seller_id}) as average";
   $user_rating_result = $conn->query($user_rating);
   while($data = $user_rating_result->fetch_assoc()){
     $review = $data['average_review'];
   }
   $sql = "SELECT Users.location, Users.username, Users.email_address,
   Users.user_id, Users.name as FirstName, Trade_ad.id as Trade_ID,
-  Trade_ad.id, Trade_ad.price, Product.name, Product.category
+  Trade_ad.id, Trade_ad.price, Trade_ad.img, Product.name, Product.category
     FROM Users
     INNER JOIN sells on Users.user_id=sells.user_id
     INNER JOIN Trade_ad ON sells.product_id=trade_ad.id
@@ -47,6 +53,7 @@
     $username = $row['username'];
     $email = $row['email_address'];
     $name = $row['name'];
+    $image = $row['img'];
     include './partials/header.php';
     //TODO add condition to trade_id parameter
     echo "
@@ -58,7 +65,13 @@
   <div class='container'>
     <div class='row'>
       <div class='col-sm-3 card'>
-        <img id='trade-pic' src='http://www.cupcakeboxes.co.nz/media/catalog/product/cache/8/image/9df78eab33525d08d6e5fb8d27136e95/s/a/sample_1.jpg' />
+        <img id='trade-pic' src='";
+        if($image==null){
+          echo "http://www.cupcakeboxes.co.nz/media/catalog/product/cache/8/image/9df78eab33525d08d6e5fb8d27136e95/s/a/sample_1.jpg'";
+        } else {
+          echo "{$image}'";
+        }
+echo " />
       </div>
       <div class='col-sm-6'>
         <div>
@@ -84,19 +97,34 @@
 
       $newSql = "SELECT * from trade_request
       where trade_request.request = {$item}
-      and trade_request.buyer = {$user_id}";
+      and complete=1";
       $resultzor = $conn->query($newSql);
       if($resultzor->num_rows > 0){
         echo "
         <div class='row'>
-          <button id='purchase' disabled>Purchase</button>
-          <button id='trade' disabled>Trade</button>
-        </div>
-        <div class='row' style='font-style: italic;'>
-          Awaiting response from {$row['username']}
+          This Item has been sold!
         </div>
         ";
       } else {
+        $response = "SELECT * from trade_request
+        where trade_request.request = {$item}";
+        $responseresult = $conn->query($response);
+        while($rowz = $responseresult->fetch_assoc()){
+          if ($rowz['trade']==1 && $rowz['buyer']==$user_id){
+            echo "
+            <div class='row'>
+              Awaiting response from {$row['username']}
+            </div>
+            <script>
+            $(document).ready(function(){
+              document.getElementById('purchase').disabled=true;
+              document.getElementById('trade').disabled=true;
+            })
+
+            </script>
+            ";
+          }
+        }
         echo "
           <div class='row'>
             <button id='purchase'>Purchase</button>
@@ -115,7 +143,7 @@
         </div>
 
         <a href='#'>Contact</a><br/>
-        <a href='#'>See other items</a>
+        <a href='/collegeCraft/views/profiles.php?goToProductPage={$row['username']}'>See other items</a>
       </div>
     </div>
     <div id='trade-form' class='card'>
@@ -162,13 +190,6 @@
  ?>
 
 
-<html>
-  <head>
-    <?php include './partials/head.html' ?>
-
-  </head>
-  <body>
-
 
   </body>
   <script>
@@ -182,25 +203,24 @@
       document.getElementById('purchase').disabled = true;
       document.getElementById('trade').disabled = true;
       var request= parseInt(<?php echo $item ?>);
-      var comment= $("#comment").val();
-      var offer = parseInt($("#trade-offer").val());
-      var price = parseInt($("#price").val());
+      // var comment= $("#comment").val();
+      // var offer = parseInt($("#trade-offer").val());
       var seller = parseInt(<?php echo $seller_id ?>);
       var buyer = parseInt(<?php echo $user_id ?>);
       var cash = 1;
-      var trade = 0;
+      // var trade = 0;
   		$.ajax({
   			url:"./requestTrade.php",
   			method:"POST",
   			data:{
           request:request,
-          comment:comment,
-          offer:offer,
-          price:price,
+          // comment:comment,
+          // offer:offer,
           seller:seller,
           buyer:buyer,
           cash:cash,
-          trade:trade},
+          // trade:trade
+        },
   			success:function(data){
           alert("Your purchase has been made!");
   			}

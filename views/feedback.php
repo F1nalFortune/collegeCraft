@@ -25,7 +25,7 @@
   INNER JOIN users ON users.user_id=sells.user_id
   INNER JOIN buys on trade_ad.id=buys.product_id
   INNER JOIN advertises on trade_ad.id = advertises.trade_ad_id
-  WHERE seller = {$user}";
+  WHERE sells.user_id = {$user}";
   $result = $conn->query($info);
 
 
@@ -36,7 +36,7 @@
                   INNER JOIN trade_ad ON review.trade_id=trade_ad.id
                   INNER JOIN sells ON trade_ad.id=sells.product_id
                   INNER JOIN users ON sells.user_id=users.user_id
-                  where seller={$user}) as average";
+                  where sells.user_id={$user}) as average";
   $user_rating_result = $conn->query($user_rating);
   while($b = $user_rating_result->fetch_assoc()){
     $review = $b['average_review'];

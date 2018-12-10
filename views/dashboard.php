@@ -13,7 +13,8 @@
 			SELECT Users.location, Users.user_id, Product.product_id
 			FROM Users
     	INNER JOIN sells on users.user_id= sells.user_id
-			INNER JOIN Product ON sells.product_id=Product.product_id) as Full_Table";
+			INNER JOIN Product ON sells.product_id=Product.product_id) as Full_Table
+			WHERE location IS NOT NULL";
 		$joinResult = $conn->query($tableJoin);
 
 			while($row = $joinResult->fetch_assoc()){
@@ -111,7 +112,7 @@
 			  <li class='list-group-item'>Dorm</li>
 			  <li class='list-group-item'>Electronics</li>
 			  <li class='list-group-item'>Books</li>
-			  <li class='list-group-item active'>ALL</li>
+			  <li id='all' class='list-group-item active'>ALL</li>
 			</ul>
 		</div>
 		<div class='col-sm-8'>
@@ -195,6 +196,8 @@ $(document).ready(function(){
 
 
 	$('#search').change(function(){
+		document.getElementById('university').value='';
+		$("#all").addClass("active").siblings().removeClass('active');
 		var search = $("#search").val();
 		console.log(search);
 		$.ajax({

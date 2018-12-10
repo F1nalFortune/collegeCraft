@@ -12,13 +12,14 @@ $cash = $_POST['cash'];
 $trade = $_POST['trade'];
 
 
+
 //IF REQUEST IS A TRADE
 //INSERT TRADE-REQUEST INTO DATABASE
 
-  if($_POST['trade']==false){
-    $sql = "INSERT INTO trade_request(seller, buyer, request, offer, price, cash, trade, comment, complete) VALUES({$seller}, {$buyer}, {$request}, {$offer}, {$price}, 1, 0, '{$comment}', 0)";
+  if($_POST['trade']==true){
+    $sql = "INSERT INTO trade_request(seller, buyer, request, offer, cash, trade, comment, complete) VALUES({$seller}, {$buyer}, {$request}, {$offer}, 0, 1, '{$comment}', 0)";
   } else {
-    $sql = "INSERT INTO trade_request(seller, buyer, request, offer, price, cash, trade, comment, complete) VALUES({$seller}, {$buyer}, {$request}, {$offer}, {$price}, 0, 1, '{$comment}', 0)";
+    $sql = "INSERT INTO trade_request(seller, buyer, request, cash, trade, complete) VALUES({$seller}, {$buyer}, {$request}, 1, 0, 1)";
   }
     $result = $conn->query($sql);
 
