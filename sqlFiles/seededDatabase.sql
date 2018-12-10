@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 10, 2018 at 04:49 AM
+-- Generation Time: Dec 10, 2018 at 05:49 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -738,6 +738,107 @@ CREATE TABLE `trade_ad` (
 -- Dumping data for table `trade_ad`
 --
 
+INSERT INTO `trade_ad` (`id`, `price`, `qty`, `img`) VALUES
+(1, 10.25, 1, 'https://images.penguinrandomhouse.com/cover/9780451529701'),
+(2, 77.44, 47, 'https://www.bhphotovideo.com/images/images1500x1500/nikon_d5600_dslr_camera_with_1308820.jpg'),
+(3, 23.81, 9, 'https://images-na.ssl-images-amazon.com/images/I/61ED7jQCO-L._SX425_.jpg'),
+(4, 65.25, 15, 'https://i5.walmartimages.com/asr/d0c3a51c-fca1-467b-818a-0c8ec3feaf0f_1.92d4cad25e46ab4203673573a8bfe367.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'),
+(5, 50.02, 17, 'https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04938204.png'),
+(6, 37.99, 45, 'https://assets.pcmag.com/media/images/320179-blackberry-q10-at-t.jpg?width=615&height=1000'),
+(7, 54.07, 10, 'https://store.schoolspecialty.com/OA_HTML/xxssi_ibeGetWCCImage.jsp?docName=F1602576&Rendition=Large'),
+(8, 82.99, 9, 'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw32abaa19/zoom/AR0459_01_standard.jpg?sw=230&sfrm=jpg'),
+(9, 89.45, 11, NULL),
+(10, 19.73, 50, 'https://www.baileyhats.com/media/catalog/product/cache/image/700x560/e9c3970ab036de70892d86c6d221abfe/B/a/Bailey-of-Hollywood-Bankside-Elite-Fedora-Fedora-Black-MAIN-655722464908-6933.jpg'),
+(11, 44.73, 6, 'https://officedepot.scene7.com/is/image/officedepot/531472_p_ticonderoga_tri_write_triangular_no_2_pencils?$OD-Large$&wid=450&hei=450'),
+(12, 53.52, 37, 'https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04938204.png'),
+(13, 18.05, 25, 'https://s3.sywcdn.net/getImage?url=http%3A%2F%2Fcontent.abt.com%2Fimage.php%2Fbig_ZW6500R.jpg%3Fimage%3D%2Fimages%2Fproducts%2FBDP_Images%2Fbig_ZW6500R.jpg%26canvas%3D1%26quality%3D100%26width%3D400%26height%3D275%26ck%3D353&t=Product&w=600&h=600&qlt=100&mrg=1&str=1&s=0c0bbf521141cf85b3dc3cb4959e09cf'),
+(14, 71.79, 28, 'https://www.docsity.com/public/cache/images/4/c/a/9/d/4ca9d3f5979a7d9927687c5589f91387910d5fd4.jpg'),
+(15, 48.29, 28, 'https://assets.pcmag.com/media/images/320179-blackberry-q10-at-t.jpg?width=615&height=1000'),
+(16, 95.74, 29, 'https://assets.pcmag.com/media/images/320179-blackberry-q10-at-t.jpg?width=615&height=1000'),
+(17, 99.53, 32, 'https://i3.cpcache.com/product/2045391796/Python_Sweatshirt_300x300.jpg?height=300&width=300&qv=90&side=front&Filters=[{%22name%22:%22background%22,%22value%22:%22ddddde%22,%22sequence%22:2}]'),
+(18, 44.64, 42, 'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw32abaa19/zoom/AR0459_01_standard.jpg?sw=230&sfrm=jpg'),
+(19, 9.5, 13, 'https://lsco1.scene7.com/is/image/lsco/1_w_superskinny_front?fmt=png8-alpha&scl=1&fmt=png-alpha'),
+(20, 95.89, 36, 'https://assets.pcmag.com/media/images/320179-blackberry-q10-at-t.jpg?width=615&height=1000'),
+(21, 89.86, 20, 'https://pics.drugstore.com/prodimg/304852/900.jpg'),
+(22, 90.97, 26, 'https://www.baileyhats.com/media/catalog/product/cache/image/700x560/e9c3970ab036de70892d86c6d221abfe/B/a/Bailey-of-Hollywood-Bankside-Elite-Fedora-Fedora-Black-MAIN-655722464908-6933.jpg'),
+(23, 99.8, 6, 'https://www.docsity.com/public/cache/images/4/c/a/9/d/4ca9d3f5979a7d9927687c5589f91387910d5fd4.jpg'),
+(24, 42.63, 48, 'https://cf5.s3.souqcdn.com/item/2018/01/21/30/10/13/58/item_XL_30101358_92321134.jpg'),
+(25, 4.73, 9, NULL),
+(26, 6.41, 16, 'https://i5.walmartimages.com/asr/d0c3a51c-fca1-467b-818a-0c8ec3feaf0f_1.92d4cad25e46ab4203673573a8bfe367.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'),
+(27, 81.58, 16, NULL),
+(28, 56.85, 42, 'https://www.docsity.com/public/cache/images/4/c/a/9/d/4ca9d3f5979a7d9927687c5589f91387910d5fd4.jpg'),
+(29, 49.16, 22, 'https://www.bhphotovideo.com/images/images1500x1500/nikon_d5600_dslr_camera_with_1308820.jpg'),
+(30, 31.48, 6, 'https://www.bhphotovideo.com/images/images1500x1500/nikon_d5600_dslr_camera_with_1308820.jpg'),
+(31, 59.38, 2, 'https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04938204.png'),
+(32, 36.4, 44, 'https://www.docsity.com/public/cache/images/4/c/a/9/d/4ca9d3f5979a7d9927687c5589f91387910d5fd4.jpg'),
+(33, 93.83, 25, 'https://www.docsity.com/public/cache/images/4/c/a/9/d/4ca9d3f5979a7d9927687c5589f91387910d5fd4.jpg'),
+(34, 59.56, 36, 'https://s3.sywcdn.net/getImage?url=http%3A%2F%2Fcontent.abt.com%2Fimage.php%2Fbig_ZW6500R.jpg%3Fimage%3D%2Fimages%2Fproducts%2FBDP_Images%2Fbig_ZW6500R.jpg%26canvas%3D1%26quality%3D100%26width%3D400%26height%3D275%26ck%3D353&t=Product&w=600&h=600&qlt=100&mrg=1&str=1&s=0c0bbf521141cf85b3dc3cb4959e09cf'),
+(35, 13.9, 49, 'https://pics.drugstore.com/prodimg/304852/900.jpg'),
+(36, 47.64, 3, 'https://store.schoolspecialty.com/OA_HTML/xxssi_ibeGetWCCImage.jsp?docName=F1602576&Rendition=Large'),
+(37, 87.62, 42, 'https://officedepot.scene7.com/is/image/officedepot/531472_p_ticonderoga_tri_write_triangular_no_2_pencils?$OD-Large$&wid=450&hei=450'),
+(38, 29.34, 6, 'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw32abaa19/zoom/AR0459_01_standard.jpg?sw=230&sfrm=jpg'),
+(39, 54.32, 23, 'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw32abaa19/zoom/AR0459_01_standard.jpg?sw=230&sfrm=jpg'),
+(40, 5.27, 27, 'https://i3.cpcache.com/product/2045391796/Python_Sweatshirt_300x300.jpg?height=300&width=300&qv=90&side=front&Filters=[{%22name%22:%22background%22,%22value%22:%22ddddde%22,%22sequence%22:2}]'),
+(41, 96.52, 16, 'https://images.penguinrandomhouse.com/cover/9780451529701'),
+(42, 62.77, 47, 'https://images-na.ssl-images-amazon.com/images/I/61ED7jQCO-L._SX425_.jpg'),
+(43, 49.96, 22, 'https://i5.walmartimages.com/asr/d0c3a51c-fca1-467b-818a-0c8ec3feaf0f_1.92d4cad25e46ab4203673573a8bfe367.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'),
+(44, 4.31, 21, 'https://images-na.ssl-images-amazon.com/images/I/61ED7jQCO-L._SX425_.jpg'),
+(45, 48.71, 4, 'https://www.baileyhats.com/media/catalog/product/cache/image/700x560/e9c3970ab036de70892d86c6d221abfe/B/a/Bailey-of-Hollywood-Bankside-Elite-Fedora-Fedora-Black-MAIN-655722464908-6933.jpg'),
+(46, 3.65, 18, 'https://i5.walmartimages.com/asr/d0c3a51c-fca1-467b-818a-0c8ec3feaf0f_1.92d4cad25e46ab4203673573a8bfe367.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'),
+(47, 87.66, 50, 'https://cf5.s3.souqcdn.com/item/2018/01/21/30/10/13/58/item_XL_30101358_92321134.jpg'),
+(48, 29.22, 25, 'https://pics.drugstore.com/prodimg/304852/900.jpg'),
+(49, 80.91, 26, NULL),
+(50, 20.4, 22, NULL),
+(51, 55.95, 41, 'https://s3.sywcdn.net/getImage?url=http%3A%2F%2Fcontent.abt.com%2Fimage.php%2Fbig_ZW6500R.jpg%3Fimage%3D%2Fimages%2Fproducts%2FBDP_Images%2Fbig_ZW6500R.jpg%26canvas%3D1%26quality%3D100%26width%3D400%26height%3D275%26ck%3D353&t=Product&w=600&h=600&qlt=100&mrg=1&str=1&s=0c0bbf521141cf85b3dc3cb4959e09cf'),
+(52, 22.61, 29, 'https://www.docsity.com/public/cache/images/4/c/a/9/d/4ca9d3f5979a7d9927687c5589f91387910d5fd4.jpg'),
+(53, 30.79, 47, 'https://images.penguinrandomhouse.com/cover/9780451529701'),
+(54, 95.81, 10, NULL),
+(55, 91.48, 44, NULL),
+(56, 48, 29, 'https://pics.drugstore.com/prodimg/304852/900.jpg'),
+(57, 75.98, 2, 'https://i3.cpcache.com/product/2045391796/Python_Sweatshirt_300x300.jpg?height=300&width=300&qv=90&side=front&Filters=[{%22name%22:%22background%22,%22value%22:%22ddddde%22,%22sequence%22:2}]'),
+(58, 20.47, 33, 'https://images-na.ssl-images-amazon.com/images/I/61ED7jQCO-L._SX425_.jpg'),
+(59, 26.77, 33, NULL),
+(60, 17.3, 12, 'https://images-na.ssl-images-amazon.com/images/I/61ED7jQCO-L._SX425_.jpg'),
+(61, 80.47, 25, NULL),
+(62, 12.69, 28, 'https://www.bhphotovideo.com/images/images1500x1500/nikon_d5600_dslr_camera_with_1308820.jpg'),
+(63, 36.85, 35, 'https://pics.drugstore.com/prodimg/304852/900.jpg'),
+(64, 46.71, 12, 'https://i3.cpcache.com/product/2045391796/Python_Sweatshirt_300x300.jpg?height=300&width=300&qv=90&side=front&Filters=[{%22name%22:%22background%22,%22value%22:%22ddddde%22,%22sequence%22:2}]'),
+(65, 54.62, 7, 'https://lsco1.scene7.com/is/image/lsco/1_w_superskinny_front?fmt=png8-alpha&scl=1&fmt=png-alpha'),
+(66, 92.58, 32, NULL),
+(67, 13.81, 10, 'https://officedepot.scene7.com/is/image/officedepot/531472_p_ticonderoga_tri_write_triangular_no_2_pencils?$OD-Large$&wid=450&hei=450'),
+(68, 77.28, 45, 'https://lsco1.scene7.com/is/image/lsco/1_w_superskinny_front?fmt=png8-alpha&scl=1&fmt=png-alpha'),
+(69, 53.42, 35, 'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw32abaa19/zoom/AR0459_01_standard.jpg?sw=230&sfrm=jpg'),
+(70, 94.15, 13, NULL),
+(71, 13.77, 9, 'https://store.schoolspecialty.com/OA_HTML/xxssi_ibeGetWCCImage.jsp?docName=F1602576&Rendition=Large'),
+(72, 93.68, 45, 'https://pics.drugstore.com/prodimg/304852/900.jpg'),
+(73, 12.37, 48, 'https://www.bhphotovideo.com/images/images1500x1500/nikon_d5600_dslr_camera_with_1308820.jpg'),
+(74, 85.32, 28, 'https://i3.cpcache.com/product/2045391796/Python_Sweatshirt_300x300.jpg?height=300&width=300&qv=90&side=front&Filters=[{%22name%22:%22background%22,%22value%22:%22ddddde%22,%22sequence%22:2}]'),
+(75, 85.46, 17, 'https://i3.cpcache.com/product/2045391796/Python_Sweatshirt_300x300.jpg?height=300&width=300&qv=90&side=front&Filters=[{%22name%22:%22background%22,%22value%22:%22ddddde%22,%22sequence%22:2}]'),
+(76, 56.77, 30, 'https://officedepot.scene7.com/is/image/officedepot/531472_p_ticonderoga_tri_write_triangular_no_2_pencils?$OD-Large$&wid=450&hei=450'),
+(77, 73.67, 3, 'https://cf5.s3.souqcdn.com/item/2018/01/21/30/10/13/58/item_XL_30101358_92321134.jpg'),
+(78, 7.8, 4, 'https://www.docsity.com/public/cache/images/4/c/a/9/d/4ca9d3f5979a7d9927687c5589f91387910d5fd4.jpg'),
+(79, 11.45, 43, 'https://i3.cpcache.com/product/2045391796/Python_Sweatshirt_300x300.jpg?height=300&width=300&qv=90&side=front&Filters=[{%22name%22:%22background%22,%22value%22:%22ddddde%22,%22sequence%22:2}]'),
+(80, 70.86, 50, 'https://images.penguinrandomhouse.com/cover/9780451529701'),
+(81, 1.44, 31, 'https://images.penguinrandomhouse.com/cover/9780451529701'),
+(82, 13.01, 3, 'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw32abaa19/zoom/AR0459_01_standard.jpg?sw=230&sfrm=jpg'),
+(83, 3.16, 4, NULL),
+(84, 19.94, 33, 'https://images-na.ssl-images-amazon.com/images/I/61ED7jQCO-L._SX425_.jpg'),
+(85, 2.8, 27, 'https://pics.drugstore.com/prodimg/304852/900.jpg'),
+(86, 38.43, 37, NULL),
+(87, 76.52, 48, 'https://i3.cpcache.com/product/2045391796/Python_Sweatshirt_300x300.jpg?height=300&width=300&qv=90&side=front&Filters=[{%22name%22:%22background%22,%22value%22:%22ddddde%22,%22sequence%22:2}]'),
+(88, 27.53, 39, 'https://store.schoolspecialty.com/OA_HTML/xxssi_ibeGetWCCImage.jsp?docName=F1602576&Rendition=Large'),
+(89, 94.3, 42, 'https://s3.sywcdn.net/getImage?url=http%3A%2F%2Fcontent.abt.com%2Fimage.php%2Fbig_ZW6500R.jpg%3Fimage%3D%2Fimages%2Fproducts%2FBDP_Images%2Fbig_ZW6500R.jpg%26canvas%3D1%26quality%3D100%26width%3D400%26height%3D275%26ck%3D353&t=Product&w=600&h=600&qlt=100&mrg=1&str=1&s=0c0bbf521141cf85b3dc3cb4959e09cf'),
+(90, 92.47, 26, NULL),
+(91, 85.75, 42, 'https://cf5.s3.souqcdn.com/item/2018/01/21/30/10/13/58/item_XL_30101358_92321134.jpg'),
+(92, 65.07, 8, 'https://store.schoolspecialty.com/OA_HTML/xxssi_ibeGetWCCImage.jsp?docName=F1602576&Rendition=Large'),
+(93, 6.16, 30, 'https://officedepot.scene7.com/is/image/officedepot/531472_p_ticonderoga_tri_write_triangular_no_2_pencils?$OD-Large$&wid=450&hei=450'),
+(94, 74.46, 19, NULL),
+(95, 66.44, 46, 'https://officedepot.scene7.com/is/image/officedepot/531472_p_ticonderoga_tri_write_triangular_no_2_pencils?$OD-Large$&wid=450&hei=450'),
+(96, 79.25, 5, NULL),
+(97, 81.62, 29, 'https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04938204.png'),
+(98, 69.35, 23, NULL),
+(99, 1.74, 18, 'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw32abaa19/zoom/AR0459_01_standard.jpg?sw=230&sfrm=jpg'),
+(102, 20.55, 0, 'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw32abaa19/zoom/AR0459_01_standard.jpg?sw=230&sfrm=jpg');
 
 -- --------------------------------------------------------
 
@@ -897,19 +998,7 @@ INSERT INTO `users` (`user_id`, `username`, `hashed_password`, `email_address`, 
 (98, 'reilly87', 'f0bfcbe24556e7d749c595f74c34aa3669fca58d', 'xsmith@example.com', 'Totam suscipit eos quaerat ut impedit dolores est. Odit sapiente quam laudantium velit. Necessitatibus quaerat sit rem in hic in reprehenderit. Sint ea sed et ut.', 0, 'Boston University', 'Art'),
 (99, 'rae28', '1291117e4dcc46be28dc3c6344a3e0de82cf6d17', 'felton54@example.net', 'Soluta fugiat debitis velit ullam qui. Beatae incidunt autem eligendi.', 0, ' Northeastern University', 'Obie'),
 (100, 'zvandervort', 'ba4f8465b61ccccd5d1c871b8bfe5335b95c1acd', 'nreichert@example.com', 'Delectus aut tenetur sunt maxime error beatae. Et ipsa et eveniet voluptatem sint dolores modi. Temporibus minima nobis nemo voluptas aut sed.', 0, ' Boston College', 'Rusty'),
-(102, 'admin', '$1$salt0123$O7peeN/6eCXL0x9F/yb.81', NULL, NULL, NULL, NULL, NULL),
-(104, 'newbie', '$1$salt0123$et3lF93ivaqsh6y4U2Sm.1', NULL, NULL, NULL, NULL, NULL),
-(106, 'kathy', '$1$salt0123$fKRlArtzwrhw52QafVSVk/', NULL, NULL, NULL, NULL, NULL),
-(107, 'register', '$1$salt0123$594arKvgxhvoYznVo0VAU1', NULL, NULL, NULL, NULL, NULL),
-(108, 'harrison', '$1$salt0123$6nl4eqFH6FuLPr94WSfm51', NULL, NULL, NULL, NULL, NULL),
-(109, 'pwnage', '$1$salt0123$.yA7p3SZo7SXM2nRlihWQ0', NULL, NULL, NULL, NULL, NULL),
-(110, 'PurePwnage', '$1$salt0123$vqBeustuB7bccBckNFbjn1', NULL, NULL, NULL, NULL, NULL),
-(111, 'PurePwnage', '$1$salt0123$vqBeustuB7bccBckNFbjn1', NULL, NULL, NULL, NULL, NULL),
-(112, 'password', '$1$salt0123$NzklwD3/qBRY6m8l6jGfg1', NULL, NULL, NULL, NULL, NULL),
-(113, 'password', '$1$salt0123$NzklwD3/qBRY6m8l6jGfg1', NULL, NULL, NULL, NULL, NULL),
-(114, 'guilford', '$1$salt0123$yfa2dsKnPbz92VuYQIsrw1', NULL, NULL, NULL, NULL, NULL),
-(115, 'titties', '$1$salt0123$04x3mxwZm28hAPBZDcJqR0', NULL, NULL, NULL, NULL, NULL),
-(116, 'tittiess\'', '$1$salt0123$qzVXgj87cA/1bSiiC7XlX0', NULL, NULL, NULL, NULL, NULL);
+(102, 'admin', '$1$salt0123$O7peeN/6eCXL0x9F/yb.81', NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -964,7 +1053,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `review`
@@ -976,7 +1065,7 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `trade_ad`
 --
 ALTER TABLE `trade_ad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `trade_request`
@@ -989,19 +1078,6 @@ ALTER TABLE `trade_request`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `trade_request`
---
-ALTER TABLE `trade_request`
-  ADD CONSTRAINT `trade_request_ibfk_1` FOREIGN KEY (`seller`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `trade_request_ibfk_2` FOREIGN KEY (`buyer`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `trade_request_ibfk_3` FOREIGN KEY (`request`) REFERENCES `trade_ad` (`id`),
-  ADD CONSTRAINT `trade_request_ibfk_4` FOREIGN KEY (`offer`) REFERENCES `trade_ad` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
