@@ -13,14 +13,24 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	$userToAdd = $_POST['username'];
 	$passwordToAdd = $_POST['password'];
 	$hashedPass = crypt($passwordToAdd,'$1$salt012345');
-	$sql = "INSERT INTO users (username, hashed_password) VALUES ('$userToAdd', '$hashedPass' );";
-	addUser($userToAdd,$hashedPass);
-	if($conn->query($sql) === TRUE){
+	$sql = $conn->prepare("INSERT INTO users (username, hashed_password) VALUES (?,?);");
+
+	$sql->bind_param("ss", $userToAdd, $hashedPass);
+	$sql->execute();
+
+	$result = $sql->get_result();
+
+
+	// addUser($userToAdd,$hashedPass);
+
+	if ($sql->affected_rows === 0){
+		echo "error";
+	} else {
 		echo "successfully added";
 		header("Location: index.php?dontreload=1");
-	}else{
-		echo "error $conn->error()";
+
 	}
+
 	#$sql = "INSERT INTO users(username, password) VALUES ($_POST["username"], crypt($_SESSION["password"],"$1$salt012345") );";
 	}
 
