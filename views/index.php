@@ -28,8 +28,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	$conn->query("create database if not exists collegeCraft");
 	$conn->query("use collegeCraft");
 	$conn->query("create table if not exists users (username varchar(32), hashed_password varchar(255),  primary key(username) )");
-        $sql = "select hashed_password from users where username='" . $user . "';";
-        $result = $conn->query($sql);
+        $sql = $conn->prepare("select hashed_password from users where username=?;");
+        $sql->bind_param("s", $user);
+        $sql->execute();
+
+        $result = $sql->get_result();
+
         if ( $result->num_rows === 0 ){
                 echo "No Login Available";
                 header("Location: registration.php");
