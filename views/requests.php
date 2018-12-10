@@ -35,13 +35,13 @@
       if($row['cash']==0){
         $output .="<div class='row' style='border: 1px solid black'>
                       <div class='col-sm-3'>
-                        <p>Requesting item # {$row['request']}</p>
+                        <p class='center'>Requesting item # {$row['request']}</p>
                       </div>
-                      <div class='col-sm-1'>
+                      <div class='col-sm-1 center'>
                         FOR
                       </div>
                       <div class='col-sm-3'>
-                        <p>Offering item # {$row['offer']}</p>
+                        <p class='center'>Offering item # {$row['offer']}</p>
                       </div>
                       <div class='col-sm-5'>
 												<div>
@@ -63,13 +63,13 @@
         $output .="
                   <div class='row' style='border: 1px solid black'>
                       <div class='col-sm-3'>
-                        <p>Requesting item # {$row['request']}</p>
+                        <p class='center'>Requesting item # {$row['request']}</p>
                       </div>
-                      <div class='col-sm-1'>
+                      <div class='col-sm-1 center'>
                         FOR
                       </div>
                       <div class='col-sm-3'>
-                        <p>$ {$row['price']}</p>
+                        <p class='center'>$ {$row['price']}</p>
                       </div>
                       <div class='col-sm-5'>
 												<div>
@@ -90,12 +90,16 @@
 
       }
     }
-
-    return $output;
+		if($output){
+			return $output;
+		} else {
+			echo "0 results";
+		}
   }
 ?>
 <head>
   <?php include './partials/head.html' ?>
+	<link rel="stylesheet" href="../public/stylesheets/starability-all.min.css">
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/requests.css">
 </head>
 <body>
@@ -114,7 +118,9 @@
       </div>
       <div class='col-sm-9'>
         <div id="show_requests">
-  				<?php echo fill_requests($conn); ?>
+  				<?php
+							echo fill_requests($conn);
+					?>
   			</div>
       </div>
     </div>

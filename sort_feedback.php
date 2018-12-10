@@ -26,7 +26,7 @@ if(isset($_POST['sort'])){
                     INNER JOIN buys on trade_ad.id=buys.product_id
                     INNER JOIN product ON trade_ad.id=product.product_id
                     INNER JOIN users ON sells.user_id=users.user_id
-                    WHERE seller = {$user}
+                    WHERE sells.user_id = {$user}
                     ORDER BY created DESC";
   } else if ($sort=='oldest'){
     // $sql = "SELECT review.id, review.review, review.trade_id, review.feedback,
@@ -48,7 +48,7 @@ if(isset($_POST['sort'])){
                     INNER JOIN buys on trade_ad.id=buys.product_id
                     INNER JOIN product ON trade_ad.id=product.product_id
                     INNER JOIN users ON users.user_id=sells.user_id
-                    WHERE seller = {$user}
+                    WHERE sells.user_id = {$user}
                     ORDER BY created ASC";
   } else if ($sort=='best'){
     // $sql = "SELECT review.id, review.review, review.trade_id, review.feedback,
@@ -70,7 +70,7 @@ if(isset($_POST['sort'])){
                     INNER JOIN buys on trade_ad.id=buys.product_id
                     INNER JOIN product ON trade_ad.id=product.product_id
                     INNER JOIN users ON users.user_id=sells.user_id
-                    WHERE seller = {$user}
+                    WHERE sells.user_id = {$user}
                     ORDER BY review DESC";
   } else {
     console.log('fail');

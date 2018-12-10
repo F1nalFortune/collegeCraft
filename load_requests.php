@@ -7,6 +7,13 @@ $seller = $_POST['seller'];
 $sold = $_POST['sold'];
 $purchased = $_POST['purchased'];
 $traded  = $_POST['traded'];
+
+$user_id = '';
+$user_id .= $_POST['buyer'];
+$user_id .= $_POST['seller'];
+$user_id .= $_POST['sold'];
+$user_id .= $_POST['purchased'];
+$user_id  .= $_POST['traded'];
 if(isset($buyer)){
   if($buyer != ''){
     $sql = "SELECT trade_request.id, trade_request.seller, trade_request.buyer,
@@ -17,7 +24,7 @@ if(isset($buyer)){
             INNER JOIN users on trade_request.buyer=users.user_id
             INNER JOIN trade_ad on trade_request.request = trade_ad.id
             WHERE buyer = {$buyer} and complete=0";
-//FIX SELLER STATEMENT
+
   } else if($seller != ''){
     $sql = "SELECT trade_request.id, trade_request.buyer,
 		trade_request.request, trade_request.offer,
@@ -73,13 +80,13 @@ if(isset($buyer)){
         $output .="
         <div class='row' style='border: 1px solid black'>
           <div class='col-sm-3'>
-            <p>Requesting item # {$row['request']}</p>
+            <p class='center'>Requesting item # {$row['request']}</p>
           </div>
-          <div class='col-sm-1'>
+          <div class='col-sm-1 center'>
             FOR
           </div>
           <div class='col-sm-3'>
-            <p>Offering item # {$row['offer']}</p>
+            <p class='center'>Offering item # {$row['offer']}</p>
           </div>
           <div class='col-sm-5'>
             <div>
@@ -101,13 +108,13 @@ if(isset($buyer)){
         $output .="
         <div class='row' style='border: 1px solid black'>
           <div class='col-sm-3'>
-            <p>Requesting item # {$row['request']}</p>
+            <p class='center'>Requesting item # {$row['request']}</p>
           </div>
-          <div class='col-sm-1'>
+          <div class='col-sm-1 center'>
             FOR
           </div>
           <div class='col-sm-3'>
-            <p>$ {$row['price']}</p>
+            <p class='center'>$ {$row['price']}</p>
           </div>
           <div class='col-sm-5'>
             <div>
@@ -170,19 +177,19 @@ if(isset($buyer)){
     			}
     		});
       </script>";
-  } else {
+  } else if($purchased != ''){
     while($row = $result->fetch_assoc()){
       if($row['cash']==0){
         $output .="
         <div class='row' style='border: 1px solid black'>
           <div class='col-sm-4 offset-sm-1'>
-            <p>Requesting item # {$row['request']}</p>
+            <p class='center'>Requesting item # {$row['request']}</p>
           </div>
-          <div class='col-sm-2'>
+          <div class='col-sm-2 center'>
             FOR
           </div>
           <div class='col-sm-4'>
-            <p>Offering item # {$row['offer']}</p>
+            <p class='center'>Offering item # {$row['offer']}</p>
           </div>
           <div class='col-sm-1'>
           </div>
@@ -191,13 +198,51 @@ if(isset($buyer)){
         $output .="
         <div class='row' style='border: 1px solid black'>
           <div class='col-sm-4 offset-sm-1'>
-            <p>Requesting item # {$row['request']}</p>
+            <p class='center'>Requesting item # {$row['request']}</p>
           </div>
-          <div class='col-sm-2'>
+          <div class='col-sm-2 center'>
             FOR
           </div>
           <div class='col-sm-4'>
-            <p>$ {$row['price']}</p>
+            <p class='center'>$ {$row['price']}</p>
+          </div>
+          <div class='col-sm-1'>
+          </div>
+          <div id='insertRequestForm{$row['request']}' style='width:100%;'>
+            <button id='{$row['request']}' class='requestbutton'>Leave Review</button>
+          </div>
+        </div>";
+
+      }
+    }
+  }else {
+    while($row = $result->fetch_assoc()){
+      if($row['cash']==0){
+        $output .="
+        <div class='row' style='border: 1px solid black'>
+          <div class='col-sm-4 offset-sm-1'>
+            <p class='center'>Requesting item # {$row['request']}</p>
+          </div>
+          <div class='col-sm-2 center'>
+            FOR
+          </div>
+          <div class='col-sm-4'>
+            <p class='center'>Offering item # {$row['offer']}</p>
+          </div>
+          <div class='col-sm-1'>
+          </div>
+        </div>";
+      } else {
+        $output .="
+        <div class='row' style='border: 1px solid black'>
+          <div class='col-sm-4 offset-sm-1'>
+            <p class='center'>Requesting item # {$row['request']}</p>
+          </div>
+          <div class='col-sm-2 center'>
+            FOR
+          </div>
+          <div class='col-sm-4'>
+            <p class='center'>$ {$row['price']}</p>
           </div>
           <div class='col-sm-1'>
           </div>
@@ -218,3 +263,39 @@ if(isset($buyer)){
 }
 
  ?>
+ <script>
+ $('.submit-feedback').click(function(){
+
+   var newdate = new Date();
+   var year = newdate.getFullYear();
+   var month = newdate.getMonth() + 1;
+   var day = newdate.getDate();
+
+   var date = year + '-' + month + '-' + day;
+   var review = this.parentElement.children[1].value;
+   var feedback = this.parentElement.children[3].value;
+   var item = this.parentElement.children[4].value;
+   $.ajax({
+     url:"../submit_review.php",
+     method:"POST",
+     data:{date:date, review:review, feedback:feedback, item:item},
+     success:function(data){
+       // console.log('successfully submited feedback')
+       $('#review-form').html("Your review has been submitted.");
+     }
+   })
+ });
+ $('.requestbutton').click(function(){
+  var trade_id= this.id;
+   $.ajax({
+     url:"../load_requestform.php",
+     method:"POST",
+     data:{trade_id:trade_id},
+     success:function(data){
+       console.log('test');
+       $('#insertRequestForm'+trade_id+'').html(data);
+     }
+   })
+ });
+
+ </script>

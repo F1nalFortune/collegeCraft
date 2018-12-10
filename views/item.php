@@ -1,3 +1,9 @@
+<html>
+  <head>
+    <?php include './partials/head.html' ?>
+
+  </head>
+  <body>
 <?php
   session_start();
 
@@ -8,12 +14,12 @@
   $item = $_GET['item'];
 
   //GET USER
-  $seller = "SELECT seller
-          FROM Trade_ad
-          WHERE trade_ad.id = {$item}";
+  $seller = "SELECT user_id
+            FROM sells
+            WHERE product_id= {$item}";
   $seller_result = $conn->query($seller);
   while($data = $seller_result->fetch_assoc()){
-    $seller_id = $data['seller'];
+    $seller_id = $data['user_id'];
   }
 
   // GRAB USER RATING
@@ -23,7 +29,7 @@
                   INNER JOIN trade_ad ON review.trade_id=trade_ad.id
                   INNER JOIN sells on trade_ad.id=sells.product_id
                   INNER JOIN users ON sells.user_id=users.user_id
-                  where seller={$seller_id}) as average";
+                  where sells.user_id={$seller_id}) as average";
   $user_rating_result = $conn->query($user_rating);
   while($data = $user_rating_result->fetch_assoc()){
     $review = $data['average_review'];
@@ -84,19 +90,34 @@
 
       $newSql = "SELECT * from trade_request
       where trade_request.request = {$item}
-      and trade_request.buyer = {$user_id}";
+      and complete=1";
       $resultzor = $conn->query($newSql);
       if($resultzor->num_rows > 0){
         echo "
         <div class='row'>
-          <button id='purchase' disabled>Purchase</button>
-          <button id='trade' disabled>Trade</button>
-        </div>
-        <div class='row' style='font-style: italic;'>
-          Awaiting response from {$row['username']}
+          This Item has been sold!
         </div>
         ";
       } else {
+        $response = "SELECT * from trade_request
+        where trade_request.request = {$item}";
+        $responseresult = $conn->query($response);
+        while($rowz = $responseresult->fetch_assoc()){
+          if ($rowz['trade']==1 && $rowz['buyer']==$user_id){
+            echo "
+            <div class='row'>
+              Awaiting response from {$row['username']}
+            </div>
+            <script>
+            $(document).ready(function(){
+              document.getElementById('purchase').disabled=true;
+              document.getElementById('trade').disabled=true;
+            })
+
+            </script>
+            ";
+          }
+        }
         echo "
           <div class='row'>
             <button id='purchase'>Purchase</button>
@@ -162,13 +183,6 @@
  ?>
 
 
-<html>
-  <head>
-    <?php include './partials/head.html' ?>
-
-  </head>
-  <body>
-
 
   </body>
   <script>
@@ -182,25 +196,24 @@
       document.getElementById('purchase').disabled = true;
       document.getElementById('trade').disabled = true;
       var request= parseInt(<?php echo $item ?>);
-      var comment= $("#comment").val();
-      var offer = parseInt($("#trade-offer").val());
-      var price = parseInt($("#price").val());
+      // var comment= $("#comment").val();
+      // var offer = parseInt($("#trade-offer").val());
       var seller = parseInt(<?php echo $seller_id ?>);
       var buyer = parseInt(<?php echo $user_id ?>);
       var cash = 1;
-      var trade = 0;
+      // var trade = 0;
   		$.ajax({
   			url:"./requestTrade.php",
   			method:"POST",
   			data:{
           request:request,
-          comment:comment,
-          offer:offer,
-          price:price,
+          // comment:comment,
+          // offer:offer,
           seller:seller,
           buyer:buyer,
           cash:cash,
-          trade:trade},
+          // trade:trade
+        },
   			success:function(data){
           alert("Your purchase has been made!");
   			}
