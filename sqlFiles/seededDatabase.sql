@@ -2,8 +2,8 @@
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 10, 2018 at 05:49 AM
+-- Host: 127.0.0.1
+-- Generation Time: Dec 11, 2018 at 05:24 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -16,13 +16,14 @@ CREATE DATABASE IF NOT EXISTS collegeCraft;
 USE collegeCraft;
 DROP TABLE IF EXISTS advertises, buys, product, review, sells, trade_ad, trade_request, users;
 
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `collegeCraft`
+-- Database: `collegecraft`
 --
 
 -- --------------------------------------------------------
@@ -140,7 +141,10 @@ INSERT INTO `advertises` (`product_id`, `trade_ad_id`) VALUES
 (97, 98),
 (98, 99),
 (99, 100),
-(102, 102);
+(102, 102),
+(103, 103),
+(104, 104),
+(105, 105);
 
 -- --------------------------------------------------------
 
@@ -257,7 +261,10 @@ INSERT INTO `buys` (`user_id`, `product_id`) VALUES
 ('97', 97),
 ('98', 98),
 ('99', 99),
-('100', 100);
+('100', 100),
+('103', 103),
+('103', 104),
+('103', 105);
 
 -- --------------------------------------------------------
 
@@ -376,7 +383,10 @@ INSERT INTO `product` (`product_id`, `name`, `description`, `category`) VALUES
 (97, ' monitor', 'Enim qui necessitatibus facilis praesentium veritatis vitae nam. Est aspernatur tempora quasi iure optio fugiat sint id. Hic animi ut officia repellat quis dolorem.', 'electronics'),
 (98, ' mini-fridge', 'Eos est quia qui labore velit ex. Est et ut vel atque deleniti. Quae ipsam illo est illo consequatur. Quia voluptas magnam at necessitatibus voluptates.', 'electronics'),
 (99, ' shoes', 'Enim sint ipsum porro at. Voluptatem quo qui quo ipsa vero. Optio non est omnis eos ipsam.', 'school'),
-(102, ' shoes', 'Laborum non porro quos molestiae eaque quam officia error. Amet quisquam quia et ipsum. Sit consequatur molestias aut sit cum id qui nesciunt. Ea nam est ipsam qui.', 'books');
+(102, ' shoes', 'Laborum non porro quos molestiae eaque quam officia error. Amet quisquam quia et ipsum. Sit consequatur molestias aut sit cum id qui nesciunt. Ea nam est ipsam qui.', 'books'),
+(103, 'gameboy', 'Sweet handheld gaming system', 'dorm'),
+(104, 'Ramen', 'College Staple Food', 'Dorm'),
+(105, 'Raspberry Pi', 'sweet raspberry pi with included breadboard', 'school');
 
 -- --------------------------------------------------------
 
@@ -601,7 +611,10 @@ INSERT INTO `review` (`id`, `review`, `trade_id`, `feedback`, `created`) VALUES
 (410, 3, 50, 'Wohooo', '2018-11-0'),
 (411, 5, 70, 'WohoooO!', '2018-12-9'),
 (412, 5, 70, 'Wohoo !', '2018-12-9'),
-(413, 5, 4, 'Great Item! Grade A quality.', '2018-12-9');
+(413, 5, 4, 'Great Item! Grade A quality.', '2018-12-9'),
+(414, 5, 103, 'Sweet Gameboy!', '2018-12-10'),
+(416, 3, 104, 'Ramen was chicken flavor :( ', '2018-12-10'),
+(419, 5, 105, 'Came with a breadboard. I had some extra wires too which made for a nice weekend project.', '2018-12-10');
 
 -- --------------------------------------------------------
 
@@ -719,7 +732,10 @@ INSERT INTO `sells` (`user_id`, `product_id`) VALUES
 ('98', 98),
 ('99', 99),
 ('100', 100),
-('102', 102);
+('102', 102),
+('102', 103),
+('102', 104),
+('102', 105);
 
 -- --------------------------------------------------------
 
@@ -838,7 +854,10 @@ INSERT INTO `trade_ad` (`id`, `price`, `qty`, `img`) VALUES
 (97, 81.62, 29, 'https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04938204.png'),
 (98, 69.35, 23, NULL),
 (99, 1.74, 18, 'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw32abaa19/zoom/AR0459_01_standard.jpg?sw=230&sfrm=jpg'),
-(102, 20.55, 0, 'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw32abaa19/zoom/AR0459_01_standard.jpg?sw=230&sfrm=jpg');
+(102, 20.55, 0, 'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw32abaa19/zoom/AR0459_01_standard.jpg?sw=230&sfrm=jpg'),
+(103, 25, 1, 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Game-Boy-Light-FL.jpg/170px-Game-Boy-Light-FL.jpg'),
+(104, 1, 1, 'https://images-na.ssl-images-amazon.com/images/I/81S96HadPlL._SL1500_.jpg'),
+(105, 20, 1, 'https://cdn-shop.adafruit.com/970x728/3775-04.jpg');
 
 -- --------------------------------------------------------
 
@@ -864,7 +883,7 @@ CREATE TABLE `trade_request` (
 
 INSERT INTO `trade_request` (`id`, `seller`, `buyer`, `request`, `offer`, `cash`, `trade`, `COMMENT`, `complete`) VALUES
 (1, 102, 4, 4, 3, 0, 1, 'asdf', 0),
-(6, 102, 44, 15, 2, 0, 1, 'asdfasdf', 1),
+(6, 102, 44, 15, 2, 0, 1, 'asdfasdf', 0),
 (9, 94, 102, 94, 2, 0, 1, 'asdfasdf', 1),
 (10, 94, 102, 94, 2, 0, 1, 'asdfa', 0),
 (12, 93, 102, 93, 3, 0, 1, 'jkl;lj', 0),
@@ -874,7 +893,10 @@ INSERT INTO `trade_request` (`id`, `seller`, `buyer`, `request`, `offer`, `cash`
 (16, 2, 102, 2, 1, 0, 1, '', 0),
 (17, 70, 102, 70, NULL, 1, 0, NULL, 1),
 (18, 91, 102, 91, NULL, 1, 0, NULL, 1),
-(19, 4, 102, 4, NULL, 1, 0, NULL, 1);
+(19, 4, 102, 4, NULL, 1, 0, NULL, 1),
+(20, 102, 103, 103, NULL, 1, 0, NULL, 1),
+(21, 102, 103, 104, NULL, 1, 0, NULL, 1),
+(22, 102, 103, 105, NULL, 1, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -998,7 +1020,8 @@ INSERT INTO `users` (`user_id`, `username`, `hashed_password`, `email_address`, 
 (98, 'reilly87', 'f0bfcbe24556e7d749c595f74c34aa3669fca58d', 'xsmith@example.com', 'Totam suscipit eos quaerat ut impedit dolores est. Odit sapiente quam laudantium velit. Necessitatibus quaerat sit rem in hic in reprehenderit. Sint ea sed et ut.', 0, 'Boston University', 'Art'),
 (99, 'rae28', '1291117e4dcc46be28dc3c6344a3e0de82cf6d17', 'felton54@example.net', 'Soluta fugiat debitis velit ullam qui. Beatae incidunt autem eligendi.', 0, ' Northeastern University', 'Obie'),
 (100, 'zvandervort', 'ba4f8465b61ccccd5d1c871b8bfe5335b95c1acd', 'nreichert@example.com', 'Delectus aut tenetur sunt maxime error beatae. Et ipsa et eveniet voluptatem sint dolores modi. Temporibus minima nobis nemo voluptas aut sed.', 0, ' Boston College', 'Rusty'),
-(102, 'admin', '$1$salt0123$O7peeN/6eCXL0x9F/yb.81', NULL, NULL, NULL, NULL, NULL);
+(102, 'admin', '$1$salt0123$O7peeN/6eCXL0x9F/yb.81', NULL, NULL, NULL, NULL, NULL),
+(103, 'user', '$1$salt0123$.yA7p3SZo7SXM2nRlihWQ0', NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -1053,31 +1076,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=414;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=420;
 
 --
 -- AUTO_INCREMENT for table `trade_ad`
 --
 ALTER TABLE `trade_ad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `trade_request`
 --
 ALTER TABLE `trade_request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
